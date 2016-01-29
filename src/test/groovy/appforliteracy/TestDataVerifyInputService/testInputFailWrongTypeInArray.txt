@@ -1,0 +1,9 @@
+{
+	"type": "FirstExample",
+	"name": "Example Input 1",
+	"words": [
+		1,
+		"Loves",
+		"Magic"
+	]
+}
