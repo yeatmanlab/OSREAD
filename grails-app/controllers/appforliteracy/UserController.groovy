@@ -18,7 +18,9 @@ class UserController {
     }
 
     def create() {
+        render "Hello World!"
         respond new User(params)
+        render "Hello World"
     }
 
     @Transactional
@@ -44,6 +46,7 @@ class UserController {
             }
             '*' { respond user, [status: CREATED] }
         }
+        render "Saved it!"
     }
 
     def edit(User user) {

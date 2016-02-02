@@ -3,7 +3,6 @@ package appforliteracy
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
-@Transactional(readOnly = true)
 class AdminController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -21,7 +20,6 @@ class AdminController {
         respond new Admin(params)
     }
 
-    @Transactional
     def save(Admin admin) {
         if (admin == null) {
             transactionStatus.setRollbackOnly()
@@ -50,7 +48,6 @@ class AdminController {
         respond admin
     }
 
-    @Transactional
     def update(Admin admin) {
         if (admin == null) {
             transactionStatus.setRollbackOnly()
@@ -75,7 +72,6 @@ class AdminController {
         }
     }
 
-    @Transactional
     def delete(Admin admin) {
 
         if (admin == null) {
