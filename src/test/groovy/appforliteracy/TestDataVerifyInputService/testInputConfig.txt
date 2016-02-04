@@ -1,4 +1,4 @@
-FirstExample
+FirstExampleInput
 {
     words: [String]
 }

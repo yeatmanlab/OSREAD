@@ -1,4 +1,4 @@
-package appforliteracy
+package appforliteracy.moduleInputDomains
 
 import grails.test.mixin.TestFor
 import spock.lang.Specification
@@ -6,8 +6,8 @@ import spock.lang.Specification
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@TestFor(Admin)
-class AdminSpec extends Specification {
+@TestFor(ThirdExample)
+class ThirdExampleSpec extends Specification {
 
     def setup() {
     }
@@ -16,7 +16,7 @@ class AdminSpec extends Specification {
     }
 
     void "test something"() {
-        expect:"fix me"
-            true == false
+        expect: "fix me"
+        true == false
     }
 }

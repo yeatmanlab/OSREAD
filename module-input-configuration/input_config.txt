@@ -2,3 +2,13 @@ FirstExample
 {
     words: [String]
 }
+
+SecondExample
+{
+    length: Integer
+}
+
+ThirdExample
+{
+    favoriteLetter: String
+}

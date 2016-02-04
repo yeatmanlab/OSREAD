@@ -1,33 +1,56 @@
 package appforliteracy
 
-import grails.transaction.Transactional
+import appforliteracy.moduleInputDomains.ModuleData
+import appforliteracy.moduleInputDomains.ModuleInput
 import org.grails.web.json.JSONArray
 import org.grails.web.json.JSONObject
-import org.springframework.web.multipart.MultipartFile
 
-//@Transactional
-class ParseInputService {
+import javax.lang.model.type.ArrayType
+
+class ParseDataService {
+
+    final DOMAINPACKAGE = "appforliteracy.moduleInputDomains."
 
     String pathToConfig;
 
-    ParseInputService(String pathToConfig) {
+    ParseDataService(String pathToConfig) {
         this.pathToConfig = pathToConfig
     }
 
-    List<String> parseInputFile(JSONObject input) throws IllegalStateException {
+    String[] getModuleTypes() {
+        List<String> types = new ArrayList<>()
+        File config = new File(pathToConfig)
+        Scanner s = new Scanner(config)
+        int bracketCount = 0
+        while(s.hasNextLine()) {
+            String line = s.nextLine().trim()
+            if (line.equals("{")) {
+                bracketCount++
+            } else if (line.equals("}")) {
+                bracketCount--
+            } else if (bracketCount == 0 && line.length() > 0) {
+                types.add(line.trim())
+            }
+        }
+        return types.toArray()
+    }
+
+    List<String> parseDataFile(JSONObject data) throws IllegalStateException {
         List<String> keys = new ArrayList<>()
-        String type = input["type"]
+        String type = data["type"]
         if (type == null || !(type instanceof String)) {
             throw new IllegalStateException("Type misformatted")
             //TODO: Use custom exception
         }
         keys.add("type")
-        String name = input["name"]
+
+        String name = data["name"]
         if (name == null || !(name instanceof String)) {
             throw new IllegalStateException("name misformatted")
             //TODO: Use custom exception
         }
         keys.add("name")
+
         File config = new File(pathToConfig)
         Scanner s = new Scanner(config)
         boolean found = false
@@ -47,7 +70,7 @@ class ParseInputService {
                 String key = splitString[0].trim()
                 String keyType = splitString[1].trim()
                 try {
-                    verifyKey(input, key, keyType)
+                    verifyKey(data, key, keyType)
                 } catch (Exception e) {
                     throw e
                 }
@@ -58,36 +81,34 @@ class ParseInputService {
         return keys
     }
 
-    def verifyKey(JSONObject input, String key, String keyType) throws IllegalStateException {
-        if(input[key] == null) {
+    void verifyKey(JSONObject data, String key, String keyType) throws IllegalStateException {
+        if(data[key] == null) {
             throw new IllegalStateException("key: " + key + " does not exist")
             //TODO: Throw customized Exception
         }
         if (keyType.charAt(0) == '[' && keyType.charAt(keyType.length() - 1) == ']') {
             keyType = keyType.substring(1, keyType.length() - 1)
-            if (!(input[key].getClass().equals(JSONArray.newInstance().getClass()))) {
-
+            if (!(data[key].getClass().equals(JSONArray.newInstance().getClass()))) {
                 throw new IllegalStateException("Value of key: " + key + " is not an array")
                 //TODO: Throw customized exception
             }
             Class type = Class.forName(getFullClassString(keyType))
-            for (int i = 0; i < input[key].size(); i++) {
-                if (!type.equals(input[key][i].getClass())) {
+            for (int i = 0; i < data[key].size(); i++) {
+                if (!type.equals(data[key][i].getClass())) {
                     throw new IllegalStateException("Value of key: " + key + " at index: " + i + " is of wrong type")
                     //TODO: Throw customized exception extending IllegalStateException
                 }
             }
         } else {
-
             Class type = Class.forName(getFullClassString(keyType))
-            if (!type.equals(input[key].getClass())) {
+            if (!type.equals(data[key].getClass())) {
                 throw new IllegalStateException("Value of key: " + key + " is of wrong type")
                 //TODO: Throw customized exception extending IllegalStateException
             }
         }
     }
 
-    static def getFullClassString (String type) {
+    String getFullClassString (String type) {
         return "java.lang." + type
     }
 }

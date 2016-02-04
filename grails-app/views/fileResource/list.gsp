@@ -12,7 +12,7 @@
 
     <h1>File Upload:</h1><br>
 
-    <g:form method="post"  enctype="multipart/form-data">
+    <g:form method="post"  enctype="multipart/form-data" params="['type': type]">
         <div class="dialog">
             <table>
                 <tbody>
@@ -27,36 +27,17 @@
                 </tbody>
             </table>
         </div>
+        <div>
+            <g:radioGroup name="moduleTypes"
+                          labels="${type}"
+                          values="${type}">
+                <p>${it.radio} ${it.label} </p>
+            </g:radioGroup>
+        </div>
         <div class="buttons">
             <span class="button"><g:actionSubmit class="upload" value="Upload" action="upload" /></span>
         </div>
     </g:form>
-
-    <h1>FileResource List</h1>
-    <g:if test="${flash.message}">
-        <div class="message">${flash.message}</div>
-    </g:if>
-    <div id="success"></div>
-    <div class="list">
-        <table>
-            <thead>
-            <tr>
-                <g:sortableColumn property="files" title="file"/>
-                <g:sortableColumn property="path" title="path" colspan="3"/>
-            </tr>
-            </thead>
-            <tbody>
-            <g:each in="${fileResourceInstanceList}" status="i" var="fileResourceInstance">
-                <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                    <td>${fileResourceInstance.decodeURL()}</td>
-                    <td> <input type="text" value="/images/${fileResourceInstance.decodeURL()}"></input></td>
-                    <td><a href="${createLinkTo( dir:'images' , file: fileResourceInstance.decodeURL(), absolute:true )}" target="_new">view</a></td>
-                    <td><g:link action="delete" id="${fileResourceInstance.replace('.','###')}" onclick="return confirm('Are you sure?');"> delete </g:link></td>
-                </tr>
-            </g:each>
-            </tbody>
-        </table>
-    </div>
 </div>
 </body>
 </html>

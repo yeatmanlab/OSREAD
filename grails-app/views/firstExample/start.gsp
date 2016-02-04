@@ -12,9 +12,14 @@
 </head>
 
 <body>
-    <g:form controller="sampleModule">
-        <g:actionSubmit value="loadFile" action="sampleModuleInputDisplay"/>
-    </g:form>
+    <ul>
+        <g:each in="${lsOut}" var="it">
+            <li>${it}</li>
+        </g:each>
+    </ul>
 
+    <g:form params="[words: lsOut]">
+        <g:actionSubmit value="submit" />
+    </g:form>
 </body>
 </html>

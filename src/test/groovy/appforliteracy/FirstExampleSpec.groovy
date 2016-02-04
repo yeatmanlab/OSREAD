@@ -1,5 +1,6 @@
 package appforliteracy
 
+import appforliteracy.moduleInputDomains.FirstExample
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 

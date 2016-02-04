@@ -1,14 +1,14 @@
 package appforliteracy
 
-import appforliteracy.moduleInputDomains.ModuleInput
+import appforliteracy.moduleInputDomains.ModuleOutput
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@TestFor(ModuleInput)
-class ModuleInputSpec extends Specification {
+@TestFor(ModuleOutput)
+class ModuleOutputSpec extends Specification {
 
     def setup() {
     }
@@ -17,7 +17,7 @@ class ModuleInputSpec extends Specification {
     }
 
     void "test something"() {
-        expect:"fix me"
-            true == true
+        expect: "fix me"
+        true == false
     }
 }

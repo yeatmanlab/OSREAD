@@ -5,53 +5,43 @@ import org.grails.web.json.JSONObject
 
 class FileResourceController {
 
-    def index = { redirect(action:list,params:params) }
-    static transactional = true
+    final String CONFIG_PATH = "./module-input-configuration/input_config.txt"
 
-    def allowedMethods = []
+    def index = { redirect(action: 'list') }
 
     def list = {
-        def fileResourceInstanceList = []
-//        def f = new File( grailsApplication.config.images.location.toString() )
-//        if( f.exists() ){
-//            f.eachFile(){ file->
-//                if( !file.isDirectory() )
-//                    fileResourceInstanceList.add( file.name )
-//            }
-//        }
-        [ fileResourceInstanceList: fileResourceInstanceList ]
-        render(view: 'list.gsp')
-
-    }
-
-    def delete = {
-        def filename = params.id.replace('###', '.')
-        def file = new File( grailsApplication.config.images.location.toString() + File.separatorChar +   filename )
-        file.delete()
-        flash.message = "file ${filename} removed"
-        redirect( action:list )
+        Researcher r = new Researcher()
+        println(r.list().size())
+        ParseDataService parser = new ParseDataService(CONFIG_PATH)
+        String[] types = parser.getModuleTypes()
+        render(view: 'list.gsp', model: [type: types])
     }
 
     def upload = {
         def f = request.getFile('fileUpload')
-
         String myString = IOUtils.toString(f.getInputStream(), "UTF-8")
-
         JSONObject input = new JSONObject(myString)
 
-        List<String> keys
+        if(params.moduleTypes.equals(input.type)) {
+            List<String> keys
+            try {
+                ParseDataService parser = new ParseDataService(CONFIG_PATH)
+                keys = parser.parseDataFile(input)
+            } catch (Exception e) {
+                println e.message
+            }
 
-        try {
-            ParseInputService parser = new ParseInputService("./module-input-configuration/input_config.txt")
-            keys = parser.parseInputFile(input)
-        } catch (Exception e) {
-            println e.message
+            WriteModuleDataToDBService writer = new WriteModuleDataToDBService(input, keys)
+            String inputID = writer.writeToDB()
+            Module m = new Module()
+            m.inputID = inputID
+            m.type = input.type
+            m.save(flush: true)
+
+            redirect(controller: input.type, action: "start", params: [id: inputID])
+        } else {
+            throw new IllegalStateException("Input file of wrong type")
+            //TODO: Custom exception
         }
-
-        //Write to DB, pass keys, JSON
-        WriteInputToDBService writer = new WriteInputToDBService(input, keys)
-        writer.writeToDB()
-
-        render(view: 'list.gsp')
     }
 }

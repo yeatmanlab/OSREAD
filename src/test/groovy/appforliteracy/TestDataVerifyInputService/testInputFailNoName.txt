@@ -1,5 +1,5 @@
 {
-	"type": "FirstExample",
+	"type": "FirstExampleInput",
 	"words": [
 		"Micha",
 		"Loves",

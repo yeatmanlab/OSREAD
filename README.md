@@ -1,9 +1,11 @@
 Creating a New Module
+Pick a name for the module (Hereafter this will be referred to as TYPE)
 
 Defining Module Input:
 1. Define a domain for the module input. This domain class must do the following:
 -extend the ModuleInput class
 -define the module input data as fields in the domain
+
 Example:
 
 class FirstExample extends ModuleInput {
@@ -17,25 +19,23 @@ class FirstExample extends ModuleInput {
 The config file entry must take the following form:
 TYPE
 {
-	fieldName: type
+	fieldName: dataType
 }
 
-The following types are accepted as input:
+The following dataTypes are accepted as input:
 String
-Character
 Integer
 Double
 Boolean
 
 or any arrays of the above types:
 [String]
-[Character]
 [Integer]
 [Double]
 [Boolean]
 
 Example:
-FirstExample
+FirstExampleInput
 {
     words: [String]
 }
@@ -54,7 +54,7 @@ The input file must take this form:
 
 Example: 
 {
-	"type": "FirstExample",
+	"type": "FirstExampleInput",
 	"name": "Example Input 1",
 	"words": [
 		"Micha",
@@ -62,3 +62,14 @@ Example:
 		"Magic"			
 	]
 }
+
+
+
+
+
+
+
+
+
+
+

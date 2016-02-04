@@ -1,4 +1,4 @@
-package appforliteracy
+package appforliteracy.moduleInputDomains
 
 class FirstExample extends ModuleInput {
 

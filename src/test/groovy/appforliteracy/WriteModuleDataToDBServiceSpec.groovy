@@ -6,7 +6,9 @@ import spock.lang.Specification
 /**
  * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
  */
-class ParseInputServiceSpec extends Specification {
+//@TestFor(WriteModuleDataToDBService)
+class WriteModuleDataToDBServiceSpec extends Specification {
+
     def setup() {
     }
 
@@ -15,6 +17,6 @@ class ParseInputServiceSpec extends Specification {
 
     void "test something"() {
         expect:"fix me"
-        true == true
+            true == true
     }
 }
