@@ -1,0 +1,5 @@
+{
+	"type": "FirstExampleInput",
+	"name": "Example Input 1",
+	"words": "Wrong String"
+}

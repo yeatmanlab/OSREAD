@@ -1,0 +1,4 @@
+FirstExampleInput
+{
+    words: [String]
+}
