@@ -3,7 +3,7 @@ package appforliteracy
 import grails.io.IOUtils
 import org.grails.web.json.JSONObject
 
-class FileResourceController {
+class FileInputController {
 
     final String CONFIG_PATH = "./module-input-configuration/input_config.txt"
 
@@ -38,7 +38,7 @@ class FileResourceController {
             m.type = input.type
             m.save(flush: true)
 
-            redirect(controller: input.type, action: "start", params: [id: inputID])
+            redirect(controller: input.type, action: "start", params: [id: m.moduleId])
         } else {
             throw new IllegalStateException("Input file of wrong type")
             //TODO: Custom exception

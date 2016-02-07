@@ -1,29 +1,40 @@
 package appforliteracy
 
 import appforliteracy.moduleInputDomains.ModuleOutput
+import org.grails.web.json.JSONArray
 import org.grails.web.json.JSONObject
 
 
 class WriteModuleOutputToDBService {
-    JSONObject output
+    String moduleID
 
-    WriteModuleOutputToDBService(JSONObject output) {
-        this.output = output
+    WriteModuleOutputToDBService(String moduleID) {
+        this.moduleID = moduleID
     }
 
-    String writeToDB () {
-        JSONObject newOutput = parseJSON()
+    String writeToDB (JSONObject output) {
+        JSONObject newOutput = parseJSON(output)
         List<String> keys = new ArrayList<>()
         keys.add("headers")
         keys.add("valueRows")
         keys.add("type")
         WriteModuleDataToDBService writer = new WriteModuleDataToDBService(newOutput, keys)
         String id = writer.writeToDB()
-        ModuleOutput.list().size()
+        Module m = Module.findByModuleId(moduleID)
+        List<String> outputs = m.outputIDs
+        if(outputs == null) {
+            m.outputIDs = [id]
+        } else {
+            m.outputIDs.add(id)
+        }
+        m.save(flush: true)
+        m = Module.findByModuleId(moduleID)
+        println("size: " + m.outputIDs.size())
+        return id
         //TODO: Save output ID in Module
     }
 
-    private JSONObject parseJSON () {
+    private JSONObject parseJSON (JSONObject output) {
         JSONObject newOutput = new JSONObject()
         newOutput.headers = output.headers
         String[][] values = output.values

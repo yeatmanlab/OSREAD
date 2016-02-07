@@ -7,12 +7,12 @@ import appforliteracy.moduleInputDomains.FirstExample
 class FirstExampleController {
 
     def start() {
-        println(params.id)
-        FirstExample input = FirstExample.findByModuleDataID(params.id)
-        //render (input.type)
+
+        String inputID = Module.findByModuleId(params.id).inputID
+        FirstExample input = FirstExample.findByModuleDataID(inputID)
 
         String[] words = input.words
-        [lsOut:words]
+        [lsOut:words, modID: params.id]
     }
 
     def submit() {
@@ -28,9 +28,9 @@ class FirstExampleController {
         }
         output.headers = ["word", "length"]
         output.values = resultRows
-        WriteModuleOutputToDBService writer = new WriteModuleOutputToDBService(output)
-        writer.writeToDB()
-        render ("Done")
+        WriteModuleOutputToDBService writer = new WriteModuleOutputToDBService(params.modID)
+        String id = writer.writeToDB(output)
+        redirect(controller: "FileOutput", action: "output", params: [id: id])
     }
 
 }

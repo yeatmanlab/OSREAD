@@ -18,7 +18,7 @@
         </g:each>
     </ul>
 
-    <g:form params="[words: lsOut]">
+    <g:form params="[words: lsOut, modID: modID]">
         <g:actionSubmit value="submit" />
     </g:form>
 </body>

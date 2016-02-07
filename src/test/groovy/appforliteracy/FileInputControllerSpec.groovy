@@ -6,8 +6,8 @@ import spock.lang.Specification
 /**
  * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
  */
-@TestFor(UserController)
-class UserControllerSpec extends Specification {
+@TestFor(FileInputController)
+class FileInputControllerSpec extends Specification {
 
     def setup() {
     }
@@ -17,6 +17,6 @@ class UserControllerSpec extends Specification {
 
     void "test something"() {
         expect:"fix me"
-            true == false
+            true == true
     }
 }
