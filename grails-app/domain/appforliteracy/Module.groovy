@@ -2,12 +2,15 @@ package appforliteracy
 
 class Module {
     
-    String moduleId
-    String contentName //upload file button
-    boolean isCompleted
-    
+    String moduleId = UUID.randomUUID().toString()
+    String inputID //upload file button
+    boolean isCompleted = false
+    static hasMany = [outputIDs:String]
+    List outputIDs
+    String type
+
     static constraints = {
         moduleId blank: false, unique: true
-        contentName blank: false
+        inputID blank: false
     }
 }

@@ -3,10 +3,11 @@ package appforliteracy
 class Researcher extends User {
     
     String position
-    Learner[] learners
+    static hasMany = [learnerIDs: String]
+    List learnerIDs
     
     static constraints = {
         position blank: false
-        learners blank: false, nullable: true
+        learnerIDs blank: false, nullable: true
     }
 }

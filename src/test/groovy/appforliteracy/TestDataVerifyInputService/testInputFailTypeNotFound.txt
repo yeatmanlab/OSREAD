@@ -1,0 +1,9 @@
+{
+	"type": "SecondExampleInput",
+	"name": "Example Input 1",
+	"words": [
+		"Micha",
+		"Loves",
+		"Magic"
+	]
+}
