@@ -19,19 +19,17 @@
 
 <div class="container">
     <h2 class="form-signin-heading">Register</h2>
-    <g:form controller="admin" action="create">
-        <g:textField name="firstName"/><br/>
+    <g:form controller="researcher" action="create">
+        <label for="firstName">First Name:</label><g:textField name="firstName"/><br/>
 
-        <g:textField name="lastName"/><br/>
+        <label for="lastName">Last Name:</label><g:textField name="lastName"/><br/>
 
-        <g:textField name="email"/><br/>
+        <label for="email">Email:</label><g:textField name="email"/><br/>
 
-        <g:textField name="password"/><br/>
+        <label for="password">Password:</label><g:textField name="password"/><br/>
 
-        <g:actionSubmit value="Save"/>
+        <g:actionSubmit value="Save" action="create"/>
 
-        <!-- Debugging! Remove when ready! -->
-        <g:link controller="Teacher" action="index">Teacher Home</g:link>
     </g:form>
 
 </div> <!-- /container -->

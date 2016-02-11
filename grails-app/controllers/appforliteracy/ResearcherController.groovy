@@ -17,6 +17,26 @@ class ResearcherController {
         respond researcher
     }
 
+    def login(){
+        Researcher r = Researcher.findByEmail(params.email)
+        if (r.password == params.password){
+            //render(view:"home.gsp")
+            home(r)
+        } else {
+            render(view:"../login/login.gsp")
+        }
+    }
+
+    def home(Researcher r){
+        //render(view:"home.gsp", model:[name:r.firstName])
+        render(view:"home.gsp", model:[fname:r.firstName, learners:r.learnerIDs])
+    }
+
+    def editLearners(){
+        Researcher r = Researcher.findByEmail(params.email)
+        render(view:"editLearners.gsp", model:[learners:r.learnerIDs])
+    }
+
     def create() {
         respond new Researcher(params)
     }
