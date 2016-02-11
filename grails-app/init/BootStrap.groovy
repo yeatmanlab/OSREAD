@@ -16,6 +16,7 @@ class BootStrap {
         researcher.password = "password"
         researcher.lastName = "Nye"
         researcher.firstName = "Bill"
+        researcher.learnerIDs = ["12"]
         researcher.save()
 
         Learner learner = new Learner()
@@ -23,6 +24,7 @@ class BootStrap {
         learner.password = "password"
         learner.lastName = "Baratheon"
         learner.firstName = "Stannis"
+        learner.id = "12"
         learner.researcherID = researcher.id
         learner.disability = "Secondborn Son Syndrome"
         learner.dateOfBirth = new Date(1990, 6, 15)

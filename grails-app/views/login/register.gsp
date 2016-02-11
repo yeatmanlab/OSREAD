@@ -18,22 +18,19 @@
 <body>
 
 <div class="container">
+    <h2 class="form-signin-heading">Register</h2>
+    <g:form controller="researcher" action="create">
+        <label for="firstName">First Name:</label><g:textField name="firstName"/><br/>
 
-    <form class="form-signin">
-        <h2 class="form-signin-heading">Register</h2>
-        <label for="inputFName" class="sr-only">First Name</label>
-        <input type="text" id="inputFName" class="form-control" placeholder="First Name" required>
-        <label for="inputLName" class="sr-only">Last Name</label>
-        <input type="text" id="inputLName" class="form-control" placeholder="Last Name" required>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <label for="inputPassword" class="sr-only">Confirm Password</label>
-        <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password" required>
+        <label for="lastName">Last Name:</label><g:textField name="lastName"/><br/>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="register()">Register</button>
-    </form>
+        <label for="email">Email:</label><g:textField name="email"/><br/>
+
+        <label for="password">Password:</label><g:textField name="password"/><br/>
+
+        <g:actionSubmit value="Save" action="create"/>
+
+    </g:form>
 
 </div> <!-- /container -->
 
