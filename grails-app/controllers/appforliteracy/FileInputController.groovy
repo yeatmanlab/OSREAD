@@ -2,8 +2,11 @@ package appforliteracy
 
 import grails.io.IOUtils
 import org.grails.web.json.JSONObject
-import metafunctionality.WriteModuleDataToDBService
 import metafunctionality.Module
+import metafunctionality.ModuleInput
+
+
+
 
 
 
@@ -27,8 +30,8 @@ class FileInputController {
         def f = request.getFile('fileUpload')
         String myString = IOUtils.toString(f.getInputStream(), "UTF-8")
         JSONObject input = new JSONObject(myString)
-
-        if(params.moduleTypes.equals(input.type)) {
+        String type = input.type
+        if(params.moduleTypes.equals(type)) {
             List<String> keys
             try {
                 ParseDataService parser = new ParseDataService(CONFIG_PATH)
@@ -36,13 +39,17 @@ class FileInputController {
             } catch (Exception e) {
                 println e.message
             }
+            ModuleInput params = Class.forName(type.toLowerCase() + "." + type).newInstance()
+            for (key in keys) {
+                params[key] = input[key]
+            }
+            println(params.save(flush: true))
 
-            WriteModuleDataToDBService writer = new WriteModuleDataToDBService(input, keys)
-            String inputID = writer.writeToDB()
+
             Module m = new Module()
-            m.inputID = inputID
+            m.inputID = params.moduleDataID
             m.type = input.type
-            m.save(flush: true)
+            println(m.save(flush: true))
             String pack = input.type.toLowerCase()
 
             redirect(controller: pack + "." + input.type, action: "start", params: [id: m.moduleId]) //TODO: Only for testing, remove
