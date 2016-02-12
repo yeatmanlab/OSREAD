@@ -1,14 +1,13 @@
 package appforliteracy
 
-import appforliteracy.moduleInputDomains.ModuleInput
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
 /**
- * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
+ * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
  */
-@TestFor(ModuleInput)
-class ModuleInputSpec extends Specification {
+@TestFor(FileInputController)
+class FileInputControllerSpec extends Specification {
 
     def setup() {
     }

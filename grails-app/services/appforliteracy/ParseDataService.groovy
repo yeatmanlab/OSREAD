@@ -1,11 +1,9 @@
 package appforliteracy
 
-import appforliteracy.moduleInputDomains.ModuleData
-import appforliteracy.moduleInputDomains.ModuleInput
+import grails.util.BuildSettings
+import grails.plugins.GrailsPluginManager
 import org.grails.web.json.JSONArray
 import org.grails.web.json.JSONObject
-
-import javax.lang.model.type.ArrayType
 
 class ParseDataService {
 
@@ -18,6 +16,7 @@ class ParseDataService {
     }
 
     String[] getModuleTypes() {
+
         List<String> types = new ArrayList<>()
         File config = new File(pathToConfig)
         Scanner s = new Scanner(config)

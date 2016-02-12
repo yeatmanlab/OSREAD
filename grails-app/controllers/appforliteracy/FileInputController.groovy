@@ -2,8 +2,14 @@ package appforliteracy
 
 import grails.io.IOUtils
 import org.grails.web.json.JSONObject
+import metafunctionality.WriteModuleDataToDBService
+import metafunctionality.Module
 
-class FileResourceController {
+
+
+
+
+class FileInputController {
 
     final String CONFIG_PATH = "./module-input-configuration/input_config.txt"
 
@@ -37,8 +43,9 @@ class FileResourceController {
             m.inputID = inputID
             m.type = input.type
             m.save(flush: true)
+            String pack = input.type.toLowerCase()
 
-            redirect(controller: input.type, action: "start", params: [id: inputID])
+            redirect(controller: pack + "." + input.type, action: "start", params: [id: m.moduleId]) //TODO: Only for testing, remove
         } else {
             throw new IllegalStateException("Input file of wrong type")
             //TODO: Custom exception

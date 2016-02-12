@@ -5,11 +5,13 @@ buildscript {
     repositories {
         mavenLocal()
         maven { url "https://repo.grails.org/grails/core" }
+
     }
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
         classpath 'com.bertramlabs.plugins:asset-pipeline-gradle:2.5.0'
         classpath "org.grails.plugins:hibernate:4.3.10.5"
+
     }
 }
 
@@ -41,6 +43,7 @@ assets {
 repositories {
     mavenLocal()
     maven { url "https://repo.grails.org/grails/core" }
+    maven { url "http://repo.grails.org/grails/plugins" }
 }
 
 dependencyManagement {
@@ -58,10 +61,17 @@ dependencies {
     compile "org.grails:grails-dependencies"
     compile "org.grails:grails-web-boot"
 
+
+
     compile "org.grails.plugins:hibernate"
     compile "org.grails.plugins:cache"
     compile "org.hibernate:hibernate-ehcache"
     compile "org.grails.plugins:scaffolding"
+
+    compile "org.grails.plugins:MetaFunctionality:0.1"
+    compile "org.grails.plugins:FirstExample:0.1"
+
+
 
     runtime "org.grails.plugins:asset-pipeline"
 
@@ -72,6 +82,8 @@ dependencies {
     testRuntime 'org.seleniumhq.selenium:selenium-htmlunit-driver:2.44.0'
 
     console "org.grails:grails-console"
+
+
 }
 
 task wrapper(type: Wrapper) {

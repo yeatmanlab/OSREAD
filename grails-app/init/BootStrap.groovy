@@ -1,8 +1,8 @@
 import appforliteracy.Learner
-import appforliteracy.Module
+
+import metafunctionality.Module
 import appforliteracy.Researcher
-import appforliteracy.User
-import appforliteracy.moduleInputDomains.FirstExample
+import firstexample.FirstExample
 import appforliteracy.moduleInputDomains.SecondExample
 import appforliteracy.moduleInputDomains.ThirdExample
 
