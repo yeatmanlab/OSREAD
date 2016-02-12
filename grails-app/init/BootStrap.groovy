@@ -3,8 +3,6 @@ import appforliteracy.Learner
 import metafunctionality.Module
 import appforliteracy.Researcher
 import firstexample.FirstExample
-import appforliteracy.moduleInputDomains.SecondExample
-import appforliteracy.moduleInputDomains.ThirdExample
 
 class BootStrap {
 
@@ -35,18 +33,6 @@ class BootStrap {
         firstExample.name = "Example1"
         firstExample.words = ["Game", "of", "Thrones"]
         firstExample.save()
-
-        SecondExample secondExample = new SecondExample()
-        secondExample.type = "SecondExample"
-        secondExample.name = "Example2"
-        secondExample.length = 17
-        secondExample.save()
-
-        ThirdExample thirdExample = new ThirdExample()
-        thirdExample.type = "ThirdExample"
-        thirdExample.name = "Example3"
-        thirdExample.favoriteLetter = "J"
-        thirdExample.save()
 
         Module module = new Module()
         module.inputID = firstExample.moduleDataID
