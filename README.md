@@ -1,5 +1,4 @@
 Creating a New Module
-
 Pick a name for the module (Hereafter this will be referred to as TYPE)
 
 Defining Module Input:
