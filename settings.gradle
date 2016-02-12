@@ -1,2 +1,5 @@
 rootProject.name = 'AppForLiteracy'
+include 'FirstRealModule'
+include 'ExampleModule'
+include 'MetaFunctionality'
 

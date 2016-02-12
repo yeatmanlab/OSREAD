@@ -2,6 +2,12 @@ package appforliteracy
 
 import grails.io.IOUtils
 import org.grails.web.json.JSONObject
+import metafunctionality.WriteModuleDataToDBService
+import metafunctionality.Module
+
+
+
+
 
 class FileInputController {
 
@@ -37,8 +43,9 @@ class FileInputController {
             m.inputID = inputID
             m.type = input.type
             m.save(flush: true)
+            String pack = input.type.toLowerCase()
 
-            redirect(controller: input.type, action: "start", params: [id: m.moduleId])
+            redirect(controller: pack + "." + input.type, action: "start", params: [id: m.moduleId]) //TODO: Only for testing, remove
         } else {
             throw new IllegalStateException("Input file of wrong type")
             //TODO: Custom exception

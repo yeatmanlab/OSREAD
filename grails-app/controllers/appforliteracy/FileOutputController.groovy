@@ -1,14 +1,17 @@
 package appforliteracy
 
-import appforliteracy.moduleInputDomains.ModuleOutput
+import metafunctionality.ModuleOutput
+
 
 class FileOutputController {
 
     def output() {
+        println (params.id)
         [id: params.id]
     }
 
     def downloadFile = {
+        println(ModuleOutput.list().size())
         ModuleOutput output = ModuleOutput.findByModuleDataID(params.id)
         String fileName = "./tmp/tmp.csv" //TODO: Better name
         try {
