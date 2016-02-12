@@ -16,7 +16,7 @@ class ParseDataService {
     }
 
     String[] getModuleTypes() {
-        GrailsPluginManager = BuildSettings.
+
         List<String> types = new ArrayList<>()
         File config = new File(pathToConfig)
         Scanner s = new Scanner(config)
