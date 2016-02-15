@@ -17,6 +17,10 @@ class ResearcherController {
         respond researcher
     }
 
+    def assign = {
+        redirect(controller: "fileInput", action: "list")
+    }
+
     def login(){
         Researcher r = Researcher.findByEmail(params.email)
         if (r.password == params.password){

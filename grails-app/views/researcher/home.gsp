@@ -64,8 +64,11 @@
             <div class="col-md-5">
                 <h3>${p}</h3>
                 <p>Put information about ${p} here.</p>
-                <a class="btn btn-primary" href="#">View Progress <span class="glyphicon glyphicon-chevron-right"></span></a>
-                <a class="btn btn-primary" href="#">Assign Modules <span class="glyphicon glyphicon-chevron-right"></span></a>
+                <g:form>
+                    <a class="btn btn-primary" href="#">View Progress <span class="glyphicon glyphicon-chevron-right"></span></a>
+
+                    <g:actionSubmit class="btn btn-primary" href="#" value="Assign Module" action="assign"> <span class="glyphicon glyphicon-chevron-right"></span> </g:actionSubmit>
+                </g:form>
             </div>
         </div>
     </g:each>
