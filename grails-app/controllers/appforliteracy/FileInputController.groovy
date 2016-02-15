@@ -19,8 +19,6 @@ class FileInputController {
     def index = { redirect(action: 'list') }
 
     def list = {
-        Researcher r = new Researcher()
-        println(r.list().size())
         ParseDataService parser = new ParseDataService(CONFIG_PATH)
         String[] types = parser.getModuleTypes()
         render(view: 'list.gsp', model: [type: types])
