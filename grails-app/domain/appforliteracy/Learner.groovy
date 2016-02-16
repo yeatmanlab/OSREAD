@@ -12,9 +12,6 @@ class Learner extends User {
         dateOfBirth blank: false
         disability blank: false
         researcherID blank: false
-        /*researcher validator: {
-            if (!Researcher.list().contains(researcher)) return ['entryMissing']
-        }*/
         moduleIDs nullable: true
     }
     
