@@ -7,7 +7,7 @@ class Researcher extends User {
     List learnerIDs
     
     static constraints = {
-        position blank: false
-        learnerIDs blank: false, nullable: true
+        position nullable: true
+        learnerIDs nullable: true
     }
 }

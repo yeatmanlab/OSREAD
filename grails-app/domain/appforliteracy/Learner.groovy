@@ -9,9 +9,9 @@ class Learner extends User {
     List moduleIDs
     
     static constraints = {
-        dateOfBirth blank: false
-        disability blank: false
-        researcherID blank: false
+        dateOfBirth nullable: true
+        disability nullable: true
+        researcherID nullable: true
         moduleIDs nullable: true
     }
     

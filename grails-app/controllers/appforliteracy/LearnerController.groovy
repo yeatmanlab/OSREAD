@@ -2,12 +2,14 @@ package appforliteracy
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
 class LearnerController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
+    
+    @Secured('ROLE_RESEARCHER')
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Learner.list(params), model:[learnerCount: Learner.count()]
