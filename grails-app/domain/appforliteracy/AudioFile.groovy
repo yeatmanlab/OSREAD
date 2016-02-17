@@ -7,7 +7,6 @@ class AudioFile {
     int sampleRate
     Date uploadDate
     double[] audioData
-    double[] correctData
     String patientId
     
     static constraints = {
