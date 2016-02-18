@@ -43,8 +43,16 @@ class ResearcherController {
     }
 
     def editLearners(){
-        Researcher r = Researcher.findByEmail(params.email)
-        render(view:"editLearners.gsp", model:[learners:r.learnerIDs])
+        //Researcher r = Researcher.findByEmail(params.email)
+        render(view:"editLearners.gsp")
+    }
+
+    def viewProgress(){
+        render(view:"../learner/viewProgress.gsp", model:[id:params.id])
+    }
+
+    def assignModules(){
+        render(view:"../learner/assignModules.gsp")
     }
 
     def create() {

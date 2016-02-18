@@ -20,10 +20,10 @@
 <div class="container">
 
     <h2 class="form-signin-heading">Log In</h2>
-    <g:form controller="researcher" action="login">
-        <label for="email">Email:</label><g:textField name="email"/><br/>
+    <g:form controller="researcher" action="login" class="form">
+        <label for="email">Email:</label><g:textField name="email" class="input"/><br/>
 
-        <label for="password">Password:</label><g:textField name="password"/><br/>
+        <label for="password">Password:</label><g:textField name="password" class="input"/><br/>
 
         <g:actionSubmit value="Log In" action="login"/>
 

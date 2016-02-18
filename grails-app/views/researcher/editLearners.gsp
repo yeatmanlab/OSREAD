@@ -55,7 +55,7 @@
     <!-- /.row -->
     <div class="panel panel-default container">
         <h2 class="form-signin-heading">Add a Learner</h2>
-        <g:form controller="researcher" action="create">
+        <g:form controller="researcher" action="create" class="form">
             <label for="firstName">First Name:</label><g:textField name="firstName"/><br/>
 
             <label for="lastName">Last Name:</label><g:textField name="lastName"/><br/>
