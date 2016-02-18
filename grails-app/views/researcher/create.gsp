@@ -1,38 +1,37 @@
-<!DOCTYPE html>
 <html>
-    <head>
-        <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'researcher.label', default: 'Researcher')}" />
-        <title><g:message code="default.create.label" args="[entityName]" /></title>
-    </head>
-    <body>
-        <a href="#create-researcher" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
-        <div id="create-researcher" class="content scaffold-create" role="main">
-            <h1><g:message code="default.create.label" args="[entityName]" /></h1>
-            <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
-            </g:if>
-            <g:hasErrors bean="${this.researcher}">
-            <ul class="errors" role="alert">
-                <g:eachError bean="${this.researcher}" var="error">
-                <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
-                </g:eachError>
-            </ul>
-            </g:hasErrors>
-            <g:form action="save">
-                <fieldset class="form">
-                    <f:all bean="researcher"/>
-                </fieldset>
-                <fieldset class="buttons">
-                    <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-                </fieldset>
-            </g:form>
-        </div>
-    </body>
+	<head>
+		<meta name="layout" content="${layoutUi}"/>
+		<s2ui:title messageCode='default.create.label' entityNameMessageCode='researcher.label' entityNameDefault='Researcher'/>
+	</head>
+	<body>
+		<h3><g:message code='default.create.label' args='[entityName]'/></h3>
+		<s2ui:form type='save' beanName='researcher' focus='researchername'>
+			<s2ui:tabs elementId='tabs' height='375' data='${tabData}'>
+				<s2ui:tab name='researcherinfo' height='280'>
+					<table>
+					<tbody>
+						<s2ui:textFieldRow name='researchername' labelCodeDefault='Researchername'/>
+						<s2ui:passwordFieldRow name='password' labelCodeDefault='Password'/>
+						<s2ui:checkboxRow name='enabled' labelCodeDefault='Enabled'/>
+						<s2ui:checkboxRow name='accountExpired' labelCodeDefault='Account Expired'/>
+						<s2ui:checkboxRow name='accountLocked' labelCodeDefault='Account Locked'/>
+						<s2ui:checkboxRow name='passwordExpired' labelCodeDefault='Password Expired'/>
+					</tbody>
+					</table>
+				</s2ui:tab>
+				<s2ui:tab name='roles' height='280'>
+					<g:each var='role' in='${authorityList}'>
+					<div>
+						<g:set var='authority' value='${uiPropertiesStrategy.getProperty(role, 'authority')}'/>
+						<g:checkBox name='${authority}'/>
+						<g:link controller='role' action='edit' id='${role.id}'>${authority}</g:link>
+					</div>
+					</g:each>
+				</s2ui:tab>
+			</s2ui:tabs>
+			<div style='float:left; margin-top: 10px;'>
+				<s2ui:submitButton/>
+			</div>
+		</s2ui:form>
+	</body>
 </html>

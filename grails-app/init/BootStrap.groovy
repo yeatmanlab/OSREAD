@@ -61,12 +61,12 @@ class BootStrap {
         def userRole = new Role('ROLE_USER').save()
         def researcherRole = new Role('ROLE_RESEARCHER').save()
         
-        def testUser1 = new Learner('sam@uw.edu','password').save()
-        def testUser2 = new Learner('joe@uw.edu','password').save()
-        def testUser3 = new Learner('erin@uw.edu','password').save()
-        def testUser4 = new Researcher('jason@uw.edu','password').save()
-        def testUser5 = new Researcher('patrick@uw.edu','password').save()
-        def testUser6 = new Researcher('anat@uw.edu','password').save()
+        def testUser1 = new User('sam@uw.edu','password').save()
+        def testUser2 = new User('joe@uw.edu','password').save()
+        def testUser3 = new User('erin@uw.edu','password').save()
+        def testUser4 = new User('jason@uw.edu','password').save()
+        def testUser5 = new User('patrick@uw.edu','password').save()
+        def testUser6 = new User('anat@uw.edu','password').save()
         
         UserRole.create testUser1, userRole
         UserRole.create testUser2, userRole
@@ -81,8 +81,8 @@ class BootStrap {
             it.clear()
         }
         
-        assert Learner.count() == 3
-        assert Researcher.count() == 3
+        //assert Learner.count() == 3
+        //assert Researcher.count() == 3
         assert User.count() == 6
         assert Role.count() == 3
         assert UserRole.count() == 6
