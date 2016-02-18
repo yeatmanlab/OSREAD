@@ -1,40 +1,37 @@
-<!DOCTYPE html>
 <html>
-    <head>
-        <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'role.label', default: 'Role')}" />
-        <title><g:message code="default.edit.label" args="[entityName]" /></title>
-    </head>
-    <body>
-        <a href="#edit-role" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
-        <div id="edit-role" class="content scaffold-edit" role="main">
-            <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
-            <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
-            </g:if>
-            <g:hasErrors bean="${this.role}">
-            <ul class="errors" role="alert">
-                <g:eachError bean="${this.role}" var="error">
-                <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
-                </g:eachError>
-            </ul>
-            </g:hasErrors>
-            <g:form resource="${this.role}" method="PUT">
-                <g:hiddenField name="version" value="${this.role?.version}" />
-                <fieldset class="form">
-                    <f:all bean="role"/>
-                </fieldset>
-                <fieldset class="buttons">
-                    <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-                </fieldset>
-            </g:form>
-        </div>
-    </body>
+	<head>
+		<meta name="layout" content="${layoutUi}"/>
+		<s2ui:title messageCode='default.edit.label' entityNameMessageCode='role.label' entityNameDefault='Role'/>
+	</head>
+	<body>
+		<h3><g:message code='default.edit.label' args='[entityName]'/></h3>
+		<s2ui:form type='update' beanName='role'>
+			<s2ui:tabs elementId='tabs' height='150' data='${tabData}'>
+				<s2ui:tab name='roleinfo' height='150'>
+					<table>
+					<tbody>
+						<s2ui:textFieldRow name='authority' labelCodeDefault='Authority'/>
+					</tbody>
+					</table>
+				</s2ui:tab>
+				<s2ui:tab name='users' height='150'>
+					<g:if test='${users.empty}'>
+					<g:message code='spring.security.ui.role_no_users'/>
+					</g:if>
+					<g:each var='u' in='${users}'>
+						<g:link controller='user' action='edit' id='${u.id}'>${uiPropertiesStrategy.getProperty(u, 'username')}</g:link><br/>
+					</g:each>
+				</s2ui:tab>
+			</s2ui:tabs>
+			<div style='float:left; margin-top: 10px;'>
+				<s2ui:submitButton/>
+				<g:if test='${role}'>
+				<s2ui:deleteButton/>
+				</g:if>
+			</div>
+		</s2ui:form>
+		<g:if test='${role}'>
+		<s2ui:deleteButtonForm instanceId='${role.id}'/>
+		</g:if>
+	</body>
 </html>
