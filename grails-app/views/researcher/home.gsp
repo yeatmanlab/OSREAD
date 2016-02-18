@@ -32,7 +32,7 @@
                     <g:link controller="Researcher" action="editLearners">Learners</g:link>
                 </li>
                 <li>
-                    <g:link controller="Researcher" action="editModules">Modules</g:link>
+                    <a href="#">Modules</a>
                 </li>
                 <li>
                     <a href="#">My Account</a>
@@ -59,14 +59,21 @@
     <!-- /.row -->
 
 
-    <g:each in="${learners}" var="p">
+    <g:each in="${learners}" var="learner">
         <div class="row" id="learners">
-            <div class="col-md-5">
-                <h3>${p}</h3>
-                <p>Put information about ${p} here.</p>
-                <g:link class="btn btn-primary" controller="Researcher" action="viewProgress" params="${[id:p]}">View Progress<span class="glyphicon glyphicon-chevron-right"></span></g:link>
-                <g:link class="btn btn-primary" controller="Researcher" action="assignModules">Assign Module<span class="glyphicon glyphicon-chevron-right"></span></g:link>
-            </div>
+            <g:form>
+                <div class="col-md-5">
+
+                    <h3>${learner.firstName} ${learner.lastName}</h3>
+                    <p>Put information about ${learner.firstName} here.</p>
+                    <g:hiddenField name="learnerID" value="${learner.userID}" />
+
+                    <g:actionSubmit class="btn btn-primary" href="#" value="View Progress" action="progress" />
+
+                    <g:actionSubmit class="btn btn-primary" href="#" value="Assign Module" action="assign" />
+
+                </div>
+            </g:form>
         </div>
     </g:each>
     <hr>

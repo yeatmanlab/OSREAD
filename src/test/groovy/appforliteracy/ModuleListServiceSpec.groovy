@@ -4,10 +4,10 @@ import grails.test.mixin.TestFor
 import spock.lang.Specification
 
 /**
- * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
+ * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
  */
-@TestFor(FileResourceController)
-class FileResourceControllerSpec extends Specification {
+@TestFor(ModuleListService)
+class ModuleListServiceSpec extends Specification {
 
     def setup() {
     }
@@ -17,6 +17,6 @@ class FileResourceControllerSpec extends Specification {
 
     void "test something"() {
         expect:"fix me"
-            true == true
+            true == false
     }
 }

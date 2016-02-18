@@ -1,38 +1,13 @@
 package appforliteracy
 
-import appforliteracy.moduleInputDomains.ModuleData
-import appforliteracy.moduleInputDomains.ModuleInput
 import org.grails.web.json.JSONArray
 import org.grails.web.json.JSONObject
 
-import javax.lang.model.type.ArrayType
 
 class ParseDataService {
-
     final DOMAINPACKAGE = "appforliteracy.moduleInputDomains."
 
-    String pathToConfig;
-
-    ParseDataService(String pathToConfig) {
-        this.pathToConfig = pathToConfig
-    }
-
-    String[] getModuleTypes() {
-        List<String> types = new ArrayList<>()
-        File config = new File(pathToConfig)
-        Scanner s = new Scanner(config)
-        int bracketCount = 0
-        while(s.hasNextLine()) {
-            String line = s.nextLine().trim()
-            if (line.equals("{")) {
-                bracketCount++
-            } else if (line.equals("}")) {
-                bracketCount--
-            } else if (bracketCount == 0 && line.length() > 0) {
-                types.add(line.trim())
-            }
-        }
-        return types.toArray()
+    ParseDataService() {
     }
 
     List<String> parseDataFile(JSONObject data) throws IllegalStateException {
@@ -51,32 +26,17 @@ class ParseDataService {
         }
         keys.add("name")
 
-        File config = new File(pathToConfig)
-        Scanner s = new Scanner(config)
-        boolean found = false
-        while (!found && s.hasNextLine()) {
-            String header = s.nextLine()
-            if (header.equals(type)) {
-                found = true
+        Class config = Class.forName(type.toLowerCase().trim() + "." + "FetchInputHeadersService")
+        Map<String,String> paramMap = config.newInstance().getHeaders()
+        for (param in paramMap.keySet()) {
+            try {
+                println(param)
+                println(paramMap.get(param))
+                verifyKey(data, param, paramMap.get(param))
+            } catch (Exception e) {
+                throw e
             }
-        }
-        if (found == false) {
-            throw new IllegalArgumentException("type: " + type + " not found in config file: " + pathToConfig)
-        }
-        String line = s.nextLine().trim()
-        while (!line.equals("}")) { //TODO: Better while condition
-            String[] splitString = line.split(":")
-            if (splitString.length == 2) {
-                String key = splitString[0].trim()
-                String keyType = splitString[1].trim()
-                try {
-                    verifyKey(data, key, keyType)
-                } catch (Exception e) {
-                    throw e
-                }
-                keys.add(key)
-            }
-            line = s.nextLine().trim()
+            keys.add(param)
         }
         return keys
     }

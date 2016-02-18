@@ -44,7 +44,7 @@ class LearnerController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'learner.label', default: 'Learner'), learner.id])
+                flash.message = message(code: 'default.created.message', args: [message(code: 'learner.label', default: 'Learner'), learner.userID])
                 redirect learner
             }
             '*' { respond learner, [status: CREATED] }
@@ -73,7 +73,7 @@ class LearnerController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'learner.label', default: 'Learner'), learner.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'learner.label', default: 'Learner'), learner.userID])
                 redirect learner
             }
             '*'{ respond learner, [status: OK] }
@@ -93,7 +93,7 @@ class LearnerController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'learner.label', default: 'Learner'), learner.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'learner.label', default: 'Learner'), learner.userID])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }

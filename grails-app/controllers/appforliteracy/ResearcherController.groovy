@@ -17,6 +17,14 @@ class ResearcherController {
         respond researcher
     }
 
+    def assign = {
+        redirect(controller: "fileInput", action: "list", id: params.learnerID)
+    }
+
+    def progress = {
+        redirect(controller: "fileOutput", action: "output", id: params.learnerID)
+    }
+
     def login(){
         Researcher r = Researcher.findByEmail(params.email)
         if (r.password == params.password){
@@ -24,12 +32,14 @@ class ResearcherController {
             home(r)
         } else {
             render(view:"../login/login.gsp")
+
         }
     }
 
     def home(Researcher r){
         //render(view:"home.gsp", model:[name:r.firstName])
-        render(view:"home.gsp", model:[fname:r.firstName, learners:r.learnerIDs])
+
+        render(view:"home.gsp", model:[fname:r.firstName, learners:r.getLearners()])
     }
 
     def editLearners(){
@@ -67,7 +77,7 @@ class ResearcherController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'researcher.label', default: 'Researcher'), researcher.id])
+                flash.message = message(code: 'default.created.message', args: [message(code: 'researcher.label', default: 'Researcher'), researcher.userID])
                 redirect researcher
             }
             '*' { respond researcher, [status: CREATED] }
@@ -96,11 +106,12 @@ class ResearcherController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'researcher.label', default: 'Researcher'), researcher.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'researcher.label', default: 'Researcher'), researcher.userID])
                 redirect researcher
             }
             '*'{ respond researcher, [status: OK] }
         }
+
     }
 
     @Transactional
@@ -116,7 +127,7 @@ class ResearcherController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'researcher.label', default: 'Researcher'), researcher.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'researcher.label', default: 'Researcher'), researcher.userID])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }

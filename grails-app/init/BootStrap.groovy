@@ -1,10 +1,9 @@
 import appforliteracy.Learner
-import appforliteracy.Module
+
+import metafunctionality.Module
 import appforliteracy.Researcher
-import appforliteracy.User
-import appforliteracy.moduleInputDomains.FirstExample
-import appforliteracy.moduleInputDomains.SecondExample
-import appforliteracy.moduleInputDomains.ThirdExample
+import firstexample.FirstExample
+import metafunctionality.ModuleOutput
 
 class BootStrap {
 
@@ -16,42 +15,47 @@ class BootStrap {
         researcher.password = "password"
         researcher.lastName = "Nye"
         researcher.firstName = "Bill"
-        researcher.learnerIDs = ["12"]
-        researcher.save()
 
         Learner learner = new Learner()
         learner.email = "example2@gmail.com"
         learner.password = "password"
         learner.lastName = "Baratheon"
         learner.firstName = "Stannis"
-        learner.id = "12"
-        learner.researcherID = researcher.id
+        learner.researcherID = researcher.userID
         learner.disability = "Secondborn Son Syndrome"
         learner.dateOfBirth = new Date(1990, 6, 15)
-        learner.save()
+
+
+        researcher.learnerIDs = [learner.userID]
+
 
         FirstExample firstExample = new FirstExample()
         firstExample.type = "FirstExample"
         firstExample.name = "Example1"
-        firstExample.words = ["Game", "of", "Thrones"]
-        firstExample.save()
+        firstExample.word = "Hall"
+        firstExample.answer = "Ball"
+        firstExample.rhymingCandidates = ["Game", "Alligator", "Pinwheel"]
 
-        SecondExample secondExample = new SecondExample()
-        secondExample.type = "SecondExample"
-        secondExample.name = "Example2"
-        secondExample.length = 17
-        secondExample.save()
-
-        ThirdExample thirdExample = new ThirdExample()
-        thirdExample.type = "ThirdExample"
-        thirdExample.name = "Example3"
-        thirdExample.favoriteLetter = "J"
-        thirdExample.save()
 
         Module module = new Module()
         module.inputID = firstExample.moduleDataID
         module.type = firstExample.type
-        module.save()
+        module.isCompleted = true
+
+        ModuleOutput output = new ModuleOutput()
+        output.headers = ["word", "accuracy"]
+        output.valueRows = ["Hello,100"]
+        output.type = "FirstExample"
+
+        module.outputIDs = [output.moduleDataID]
+
+        learner.moduleIDs = [module.moduleId]
+
+        firstExample.save(flush: true)
+        researcher.save(flush: true)
+        learner.save(flush: true)
+        module.save(flush: true)
+        output.save(flush: true)
     }
     def destroy = {
     }
