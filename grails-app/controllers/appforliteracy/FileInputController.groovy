@@ -55,4 +55,8 @@ class FileInputController {
             //TODO: Custom exception
         }
     }
+
+    def logout() {
+        redirect(controller:"Login", action:"index")
+    }
 }

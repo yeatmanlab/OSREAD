@@ -25,21 +25,9 @@ class ResearcherController {
         redirect(controller: "fileOutput", action: "output", id: params.learnerID)
     }
 
-    def login(){
-        Researcher r = Researcher.findByEmail(params.email)
-        if (r.password == params.password){
-            //render(view:"home.gsp")
-            home(r)
-        } else {
-            render(view:"../login/login.gsp")
-
-        }
-    }
-
-    def home(Researcher r){
-        //render(view:"home.gsp", model:[name:r.firstName])
-
-        render(view:"home.gsp", model:[fname:r.firstName, learners:r.getLearners()])
+    def home = {
+        Researcher r = Researcher.findByUserID(params.id)
+        [fname:r.firstName, learners:r.getLearners()]
     }
 
     def editLearners(){

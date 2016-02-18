@@ -51,25 +51,31 @@
     </div>
 <!-- /.row -->
 
-    <div>
-        <g:if test="${modules.length > 0}">
-        <h2>You have new activities to do!</h2>
-        <h3>Choose an activity below.</h3>
-            <g:each in="${modules}" var="p">
+
+    <g:if test="${modules.size() > 0}">
+    <h2>You have new activities to do!</h2>
+    <h3>Choose an activity below.</h3>
+        <g:each in="${modules}" var="p">
+
                 <div class="row" id="modules">
                     <div class="col-md-5">
-                        <g:link><h5>${p}</h5></g:link>
-                        <g:link class="btn btn-primary">Play ${p}<span class="glyphicon glyphicon-chevron-right"></span></g:link>
+                        <g:form>
+                            <h5>${p.type}</h5>
+                            <g:hiddenField name="id" value="${p.moduleId}" />
+                            <g:hiddenField name="type" value="${p.type}" />
+                            <g:hiddenField name="test" value="test" />
+                            <g:actionSubmit value="Play ${p.type}" action="startModule" class="btn btn-primary" />
+                        </g:form>
                     </div>
                 </div>
-            </g:each>
-            <hr>
-        </g:if>
-        <g:else>
-            <h2>You do not have new activities yet!</h2>
-            <h3>Check back soon!<h3>
-        </g:else>
-    </div>
+        </g:each>
+        <hr>
+    </g:if>
+    <g:else>
+        <h2>You do not have new activities yet!</h2>
+        <h3>Check back soon!<h3>
+    </g:else>
+
 
 </div>
 <!-- /.container -->

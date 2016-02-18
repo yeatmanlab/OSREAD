@@ -24,7 +24,7 @@
 
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#">Log Out</a>
+                    <g:link action="logout" >Log Out</g:link>
                 </li>
                 <li>
                     <g:link controller="Researcher" action="editLearners">Learners</g:link>

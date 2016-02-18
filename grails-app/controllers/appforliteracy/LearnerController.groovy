@@ -21,9 +21,18 @@ class LearnerController {
         respond new Learner(params)
     }
 
-    def home(Learner r){
-        //render(view:"home.gsp", model:[name:r.firstName])
-        render(view:"home.gsp", model:[fname:r.firstName, modules:r.moduleIDs])
+    def home() {
+        Learner r = Learner.findByUserID(params.id)
+        [fname:r.firstName, modules:r.getModules()]
+    }
+
+    def startModule() {
+        String controller = params.type
+        String id = params.id
+        println(controller)
+        println(id)
+        println(params.test)
+        redirect(controller: controller, action: "start", id: id)
     }
 
     @Transactional

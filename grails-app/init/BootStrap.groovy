@@ -37,25 +37,25 @@ class BootStrap {
         firstExample.rhymingCandidates = ["Game", "Alligator", "Pinwheel"]
 
 
-        Module module = new Module()
-        module.inputID = firstExample.moduleDataID
-        module.type = firstExample.type
-        module.isCompleted = true
+//        Module module = new Module()
+//        module.inputID = firstExample.moduleDataID
+//        module.type = firstExample.type
+//        module.isCompleted = true
 
-        ModuleOutput output = new ModuleOutput()
-        output.headers = ["word", "accuracy"]
-        output.valueRows = ["Hello,100"]
-        output.type = "FirstExample"
+//        ModuleOutput output = new ModuleOutput()
+//        output.headers = ["word", "accuracy"]
+//        output.valueRows = ["Hello,100"]
+//        output.type = "FirstExample"
 
-        module.outputIDs = [output.moduleDataID]
+//        module.outputIDs = [output.moduleDataID]
 
-        learner.moduleIDs = [module.moduleId]
+        //learner.moduleIDs = [module.moduleId]
 
         firstExample.save(flush: true)
         researcher.save(flush: true)
         learner.save(flush: true)
-        module.save(flush: true)
-        output.save(flush: true)
+        //module.save(flush: true)
+        //output.save(flush: true)
     }
     def destroy = {
     }
