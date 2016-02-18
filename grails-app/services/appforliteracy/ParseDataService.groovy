@@ -7,22 +7,7 @@ import org.grails.web.json.JSONObject
 class ParseDataService {
     final DOMAINPACKAGE = "appforliteracy.moduleInputDomains."
 
-    String pathToConfig;
-
-    ParseDataService(String pathToConfig) {
-        this.pathToConfig = pathToConfig
-    }
-
-    String[] getModuleTypes() {
-
-        List<String> types = new ArrayList<>()
-        File config = new File(pathToConfig)
-        Scanner s = new Scanner(config)
-        while(s.hasNextLine()) {
-            String line = s.nextLine().trim()
-            types.add(line)
-        }
-        return types.toArray()
+    ParseDataService() {
     }
 
     List<String> parseDataFile(JSONObject data) throws IllegalStateException {

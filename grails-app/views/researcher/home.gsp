@@ -59,17 +59,21 @@
     <!-- /.row -->
 
 
-    <g:each in="${learners}" var="p">
+    <g:each in="${learners}" var="learner">
         <div class="row" id="learners">
-            <div class="col-md-5">
-                <h3>${p}</h3>
-                <p>Put information about ${p} here.</p>
-                <g:form>
-                    <a class="btn btn-primary" href="#">View Progress <span class="glyphicon glyphicon-chevron-right"></span></a>
+            <g:form>
+                <div class="col-md-5">
 
-                    <g:actionSubmit class="btn btn-primary" href="#" value="Assign Module" action="assign"> <span class="glyphicon glyphicon-chevron-right"></span> </g:actionSubmit>
-                </g:form>
-            </div>
+                    <h3>${learner.firstName} ${learner.lastName}</h3>
+                    <p>Put information about ${learner.firstName} here.</p>
+                    <g:hiddenField name="learnerID" value="${learner.userID}" />
+
+                    <g:actionSubmit class="btn btn-primary" href="#" value="View Progress" action="progress" />
+
+                    <g:actionSubmit class="btn btn-primary" href="#" value="Assign Module" action="assign" />
+
+                </div>
+            </g:form>
         </div>
     </g:each>
     <hr>

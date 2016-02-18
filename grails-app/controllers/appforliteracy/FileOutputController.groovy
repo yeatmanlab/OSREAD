@@ -1,18 +1,19 @@
 package appforliteracy
 
 import metafunctionality.ModuleOutput
+import metafunctionality.Module
 
 
 class FileOutputController {
 
     def output() {
-        println (params.id)
-        [id: params.id]
+        Learner learner = Learner.findByUserID(params.id)
+        List<Module> modules = learner.getModules()
+        [modules: modules]
     }
 
     def downloadFile = {
-        println(ModuleOutput.list().size())
-        ModuleOutput output = ModuleOutput.findByModuleDataID(params.id)
+        ModuleOutput output = ModuleOutput.findByModuleDataID(params.outputID)
         String fileName = "./tmp/tmp.csv" //TODO: Better name
         try {
             FileWriter writer = new FileWriter(fileName)

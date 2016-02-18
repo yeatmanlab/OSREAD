@@ -3,6 +3,7 @@ import appforliteracy.Learner
 import metafunctionality.Module
 import appforliteracy.Researcher
 import firstexample.FirstExample
+import metafunctionality.ModuleOutput
 
 class BootStrap {
 
@@ -14,22 +15,19 @@ class BootStrap {
         researcher.password = "password"
         researcher.lastName = "Nye"
         researcher.firstName = "Bill"
-        researcher.learnerIDs = ["12"]
-
 
         Learner learner = new Learner()
         learner.email = "example2@gmail.com"
         learner.password = "password"
         learner.lastName = "Baratheon"
         learner.firstName = "Stannis"
-        learner.researcherID = researcher.id
+        learner.researcherID = researcher.userID
         learner.disability = "Secondborn Son Syndrome"
         learner.dateOfBirth = new Date(1990, 6, 15)
 
-        learner.save()
 
-        researcher.learnerIDs = [learner.id]
-        researcher.save()
+        researcher.learnerIDs = [learner.userID]
+
 
         FirstExample firstExample = new FirstExample()
         firstExample.type = "FirstExample"
@@ -37,12 +35,27 @@ class BootStrap {
         firstExample.word = "Hall"
         firstExample.answer = "Ball"
         firstExample.rhymingCandidates = ["Game", "Alligator", "Pinwheel"]
-        firstExample.save()
+
 
         Module module = new Module()
         module.inputID = firstExample.moduleDataID
         module.type = firstExample.type
-        module.save()
+        module.isCompleted = true
+
+        ModuleOutput output = new ModuleOutput()
+        output.headers = ["word", "accuracy"]
+        output.valueRows = ["Hello,100"]
+        output.type = "FirstExample"
+
+        module.outputIDs = [output.moduleDataID]
+
+        learner.moduleIDs = [module.moduleId]
+
+        firstExample.save(flush: true)
+        researcher.save(flush: true)
+        learner.save(flush: true)
+        module.save(flush: true)
+        output.save(flush: true)
     }
     def destroy = {
     }
