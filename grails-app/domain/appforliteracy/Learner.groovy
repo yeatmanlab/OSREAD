@@ -1,5 +1,7 @@
 package appforliteracy
 
+import metafunctionality.Module
+
 class Learner extends User {
 
     Date dateOfBirth
@@ -20,5 +22,16 @@ class Learner extends User {
         researcherID nullable: true
         moduleIDs nullable: true
     }
-    
+
+    def getResearcher () {
+        return Researcher.findByUserID(researcherID)
+    }
+
+    def getModules () {
+        List<Module> modules = new ArrayList<>()
+        for (modID in moduleIDs) {
+            modules.add(Module.findByModuleId(modID))
+        }
+        return modules
+    }
 }

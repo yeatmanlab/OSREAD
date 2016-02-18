@@ -16,4 +16,12 @@ class Researcher extends User {
         position nullable: true
         learnerIDs nullable: true
     }
+
+    def getLearners () {
+        List<Learner> learners = new ArrayList<>()
+        for (learnerID in learnerIDs) {
+            learners.add(Learner.findByUserID(learnerID))
+        }
+        return learners
+    }
 }

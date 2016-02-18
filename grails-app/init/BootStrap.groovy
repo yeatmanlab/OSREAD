@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*import appforliteracy.Learner
 import appforliteracy.Module
 import appforliteracy.Researcher
@@ -11,6 +12,14 @@ import appforliteracy.Researcher
 import appforliteracy.Role
 import appforliteracy.User
 import appforliteracy.UserRole
+=======
+import appforliteracy.Learner
+
+import metafunctionality.Module
+import appforliteracy.Researcher
+import firstexample.FirstExample
+import metafunctionality.ModuleOutput
+>>>>>>> master
 
 class BootStrap {
 
@@ -22,39 +31,32 @@ class BootStrap {
         researcher.password = "password"
         researcher.lastName = "Nye"
         researcher.firstName = "Bill"
-        researcher.save()
 
         Learner learner = new Learner()
         learner.email = "example2@gmail.com"
         learner.password = "password"
         learner.lastName = "Baratheon"
         learner.firstName = "Stannis"
-        learner.researcherID = researcher.id
+        learner.researcherID = researcher.userID
         learner.disability = "Secondborn Son Syndrome"
         learner.dateOfBirth = new Date(1990, 6, 15)
-        learner.save()
+
+
+        researcher.learnerIDs = [learner.userID]
+
 
         FirstExample firstExample = new FirstExample()
         firstExample.type = "FirstExample"
         firstExample.name = "Example1"
-        firstExample.words = ["Game", "of", "Thrones"]
-        firstExample.save()
+        firstExample.word = "Hall"
+        firstExample.answer = "Ball"
+        firstExample.rhymingCandidates = ["Game", "Alligator", "Pinwheel"]
 
-        SecondExample secondExample = new SecondExample()
-        secondExample.type = "SecondExample"
-        secondExample.name = "Example2"
-        secondExample.length = 17
-        secondExample.save()
-
-        ThirdExample thirdExample = new ThirdExample()
-        thirdExample.type = "ThirdExample"
-        thirdExample.name = "Example3"
-        thirdExample.favoriteLetter = "J"
-        thirdExample.save()
 
         Module module = new Module()
         module.inputID = firstExample.moduleDataID
         module.type = firstExample.type
+<<<<<<< HEAD
         module.save()*/
         
         def adminRole = new Role('ROLE_ADMIN').save()
@@ -87,6 +89,24 @@ class BootStrap {
         assert Role.count() == 3
         assert UserRole.count() == 6
         
+=======
+        module.isCompleted = true
+
+        ModuleOutput output = new ModuleOutput()
+        output.headers = ["word", "accuracy"]
+        output.valueRows = ["Hello,100"]
+        output.type = "FirstExample"
+
+        module.outputIDs = [output.moduleDataID]
+
+        learner.moduleIDs = [module.moduleId]
+
+        firstExample.save(flush: true)
+        researcher.save(flush: true)
+        learner.save(flush: true)
+        module.save(flush: true)
+        output.save(flush: true)
+>>>>>>> master
     }
     def destroy = {
     }

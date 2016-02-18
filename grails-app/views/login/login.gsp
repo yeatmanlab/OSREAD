@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sign In - App for Literacy</title>
+    <title>Log In - App for Literacy</title>
     <asset:stylesheet src="bootstrap.css"/>
     <asset:javascript src="bootstrap.js"/>
 
@@ -19,16 +19,17 @@
 
 <div class="container">
 
-    <form class="form-signin">
-        <h2 class="form-signin-heading">Sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="login()">Sign in</button>
-        <g:link controller="Login" action="register">First Time? Register</g:link>
-    </form>
+    <h2 class="form-signin-heading">Log In</h2>
+    <g:form controller="researcher" action="login">
+        <label for="email">Email:</label><g:textField name="email"/><br/>
 
+        <label for="password">Password:</label><g:textField name="password"/><br/>
+
+        <g:actionSubmit value="Log In" action="login"/>
+
+        <g:link controller="Login" action="register">First Time? Register</g:link>
+
+    </g:form>
 </div> <!-- /container -->
 
 </body>
