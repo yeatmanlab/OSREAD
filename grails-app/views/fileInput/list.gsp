@@ -12,7 +12,8 @@
 
     <h1>File Upload:</h1><br>
 
-    <g:form method="post"  enctype="multipart/form-data" params="['type': type]">
+    <g:form method="post"  enctype="multipart/form-data" params="['type': type, 'userID': id]">
+        <g:hiddenField name="learnerID" value="${id}" />
         <div class="dialog">
             <table>
                 <tbody>
@@ -35,7 +36,7 @@
             </g:radioGroup>
         </div>
         <div class="buttons">
-            <span class="button"><g:actionSubmit class="upload" value="Upload" action="upload" /></span>
+            <span class="button"><g:actionSubmit class="upload" value="Upload" action="upload"/></span>
         </div>
     </g:form>
 </div>

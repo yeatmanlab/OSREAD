@@ -5,23 +5,14 @@ import org.grails.web.json.JSONObject
 import metafunctionality.Module
 import metafunctionality.ModuleInput
 
-
-
-
-
-
-
-
 class FileInputController {
-
-    final String CONFIG_PATH = "./module-input-configuration/input_config.txt"
 
     def index = { redirect(action: 'list') }
 
     def list = {
-        ParseDataService parser = new ParseDataService(CONFIG_PATH)
-        String[] types = parser.getModuleTypes()
-        render(view: 'list.gsp', model: [type: types])
+        List<String> types = ModuleListService.getModuleNames()
+
+        [type: types, id: params.id]
     }
 
     def upload = {
@@ -32,25 +23,33 @@ class FileInputController {
         if(params.moduleTypes.equals(type)) {
             List<String> keys
             try {
-                ParseDataService parser = new ParseDataService(CONFIG_PATH)
+                ParseDataService parser = new ParseDataService()
                 keys = parser.parseDataFile(input)
             } catch (Exception e) {
                 println e.message
             }
-            ModuleInput params = Class.forName(type.toLowerCase() + "." + type).newInstance()
+            ModuleInput moduleInput = Class.forName(type.toLowerCase() + "." + type).newInstance()
             for (key in keys) {
-                params[key] = input[key]
+                moduleInput[key] = input[key]
             }
-            println(params.save(flush: true))
-
 
             Module m = new Module()
-            m.inputID = params.moduleDataID
-            m.type = input.type
-            println(m.save(flush: true))
-            String pack = input.type.toLowerCase()
+            m.inputID = moduleInput.moduleDataID
+            m.type = moduleInput.type
 
-            redirect(controller: pack + "." + input.type, action: "start", params: [id: m.moduleId]) //TODO: Only for testing, remove
+            Learner learner = Learner.findByUserID(params.learnerID)
+            if (learner.moduleIDs != null) {
+                learner.moduleIDs.add(m.moduleId)
+            } else {
+                learner.moduleIDs = [m.moduleId]
+            }
+
+            moduleInput.save(flush: true)
+            m.save(flush: true)
+            learner.save(flush: true)
+
+            [id: params.learnerID]
+
         } else {
             throw new IllegalStateException("Input file of wrong type")
             //TODO: Custom exception
