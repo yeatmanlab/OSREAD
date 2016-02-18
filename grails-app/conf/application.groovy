@@ -7,8 +7,8 @@ grails.plugin.springsecurity.userLookup.usernamePropertyName = 'email'
 grails.plugin.springsecurity.authority.className = 'appforliteracy.Role'
 grails.plugin.springsecurity.rejectIfNoRule = false
 grails.plugin.springsecurity.fii.rejectPublicInvocations = false
-//grails.plugin.springsecurity.auth.loginFormUrl = '/login'
-grails.plugin.springsecurity.logout.afterLogoutUrl = '/login'
+//grails.plugin.springsecurity.auth.loginFormUrl = '/login/auth'
+grails.plugin.springsecurity.logout.afterLogoutUrl = '/login/auth'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	[pattern: '/',               access: ['permitAll']],
 	[pattern: '/error',          access: ['permitAll']],
