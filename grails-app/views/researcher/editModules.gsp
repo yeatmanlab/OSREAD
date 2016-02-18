@@ -1,28 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
+<%--
+  Created by IntelliJ IDEA.
+  User: Erin P
+  Date: 2/10/2016
+  Time: 10:28 PM
+--%>
 
+<%@ page contentType="text/html;charset=UTF-8" %>
+<html>
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Home</title>
+    <title>Learners</title>
 
     <asset:stylesheet src="bootstrap.css"/>
     <asset:javascript src="bootstrap.js"/>
-
 </head>
 
 <body>
-
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+
 
             <ul class="nav navbar-nav">
                 <li>
@@ -45,36 +44,22 @@
     <!-- /.container -->
 </nav>
 
-<!-- Page Content -->
 <div class="container">
 
     <!-- Page Heading -->
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">App For Literacy
-                <small>Welcome, ${fname}!</small>
-            </h1>
+            <h1 class="page-header">Edit Modules</h1>
         </div>
     </div>
     <!-- /.row -->
+    <div class="panel panel-default container">
+        <h2 class="form-signin-heading">Add a Module</h2>
 
-
-    <g:each in="${learners}" var="p">
-        <div class="row" id="learners">
-            <div class="col-md-5">
-                <h3>${p}</h3>
-                <p>Put information about ${p} here.</p>
-                <g:link class="btn btn-primary" controller="Researcher" action="viewProgress" params="${[id:p]}">View Progress<span class="glyphicon glyphicon-chevron-right"></span></g:link>
-                <g:link class="btn btn-primary" controller="Researcher" action="assignModules">Assign Module<span class="glyphicon glyphicon-chevron-right"></span></g:link>
-            </div>
-        </div>
-    </g:each>
-    <hr>
-
+    </div> <!-- /container -->
+    <div class="container panel panel-default">
+        <h2 class="form-signin-heading">Remove a Module</h2>
+    </div>
 </div>
-<!-- /.container -->
-
 </body>
-
 </html>
-

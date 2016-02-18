@@ -28,16 +28,6 @@
                 <li>
                     <a href="#">Log Out</a>
                 </li>
-                <li>
-                    <g:link controller="Researcher" action="editLearners">Learners</g:link>
-                </li>
-                <li>
-                    <g:link controller="Researcher" action="editModules">Modules</g:link>
-                </li>
-                <li>
-                    <a href="#">My Account</a>
-                </li>
-
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -56,20 +46,27 @@
             </h1>
         </div>
     </div>
-    <!-- /.row -->
+<!-- /.row -->
 
-
-    <g:each in="${learners}" var="p">
-        <div class="row" id="learners">
-            <div class="col-md-5">
-                <h3>${p}</h3>
-                <p>Put information about ${p} here.</p>
-                <g:link class="btn btn-primary" controller="Researcher" action="viewProgress" params="${[id:p]}">View Progress<span class="glyphicon glyphicon-chevron-right"></span></g:link>
-                <g:link class="btn btn-primary" controller="Researcher" action="assignModules">Assign Module<span class="glyphicon glyphicon-chevron-right"></span></g:link>
-            </div>
-        </div>
-    </g:each>
-    <hr>
+    <div>
+        <g:if test="${modules.length > 0}">
+        <h2>You have new activities to do!</h2>
+        <h3>Choose an activity below.</h3>
+            <g:each in="${modules}" var="p">
+                <div class="row" id="modules">
+                    <div class="col-md-5">
+                        <g:link><h5>${p}</h5></g:link>
+                        <g:link class="btn btn-primary">Play ${p}<span class="glyphicon glyphicon-chevron-right"></span></g:link>
+                    </div>
+                </div>
+            </g:each>
+            <hr>
+        </g:if>
+        <g:else>
+            <h2>You do not have new activities yet!</h2>
+            <h3>Check back soon!<h3>
+        </g:else>
+    </div>
 
 </div>
 <!-- /.container -->

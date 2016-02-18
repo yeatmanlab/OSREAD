@@ -21,6 +21,11 @@ class LearnerController {
         respond new Learner(params)
     }
 
+    def home(Learner r){
+        //render(view:"home.gsp", model:[name:r.firstName])
+        render(view:"home.gsp", model:[fname:r.firstName, modules:r.moduleIDs])
+    }
+
     @Transactional
     def save(Learner learner) {
         if (learner == null) {
