@@ -44,7 +44,7 @@
     </div>
     <h3>Choose a module and upload individualized content</h3><br>
 
-    <g:form method="post"  enctype="multipart/form-data" params="['type': type, 'userID': id]">
+    <g:form method="post"  enctype="multipart/form-data" params="['type': type, 'userID': id]" class="form">
         <g:hiddenField name="learnerID" value="${id}" />
         <div class="dialog">
             <label>Module:</label>
