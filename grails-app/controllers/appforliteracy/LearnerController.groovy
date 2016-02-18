@@ -1,5 +1,8 @@
 package appforliteracy
 
+<<<<<<< HEAD
+class LearnerController extends grails.plugin.springsecurity.ui.UserController {
+=======
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -104,4 +107,5 @@ class LearnerController {
             '*'{ render status: NOT_FOUND }
         }
     }
+>>>>>>> master
 }

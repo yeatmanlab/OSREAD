@@ -10,13 +10,16 @@ class Learner extends User {
     static hasMany = [moduleIDs: String]
     List moduleIDs
     
+    Learner(String email, String password) {
+	this()
+	this.email = email
+	this.password = password
+    }
+    
     static constraints = {
-        dateOfBirth blank: false
-        disability blank: false
-        researcherID blank: false
-        /*researcher validator: {
-            if (!Researcher.list().contains(researcher)) return ['entryMissing']
-        }*/
+        dateOfBirth nullable: true
+        disability nullable: true
+        researcherID nullable: true
         moduleIDs nullable: true
     }
 

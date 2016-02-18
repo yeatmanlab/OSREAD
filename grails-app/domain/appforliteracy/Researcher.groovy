@@ -6,9 +6,15 @@ class Researcher extends User {
     static hasMany = [learnerIDs: String]
     List learnerIDs
     
+    Researcher(String email, String password) {
+	this()
+	this.email = email
+	this.password = password
+    }
+    
     static constraints = {
-        position blank: false
-        learnerIDs blank: false, nullable: true
+        position nullable: true
+        learnerIDs nullable: true
     }
 
     def getLearners () {
