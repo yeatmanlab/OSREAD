@@ -28,6 +28,9 @@
                 <li>
                     <a href="#">Log Out</a>
                 </li>
+                <li>
+                    <g:link action="viewProgress">View Your Progress!</g:link>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
