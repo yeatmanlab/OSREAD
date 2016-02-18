@@ -1,13 +1,10 @@
 package appforliteracy
 
-<<<<<<< HEAD
-class ResearcherController extends grails.plugin.springsecurity.ui.UserController {
-=======
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
-class ResearcherController {
+class ResearcherController extends grails.plugin.springsecurity.ui.UserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -138,5 +135,4 @@ class ResearcherController {
             '*'{ render status: NOT_FOUND }
         }
     }
->>>>>>> master
 }

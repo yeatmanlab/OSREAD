@@ -44,12 +44,8 @@ assets {
 repositories {
     mavenLocal()
     maven { url "https://repo.grails.org/grails/core" }
-<<<<<<< HEAD
 	maven { url "https://repo.grails.org/grails/plugins" }
-=======
-    maven { url "http://repo.grails.org/grails/plugins" }
     maven { url "http://dl.bintray.com/osreadplugins/plugins" }
->>>>>>> master
 }
 
 dependencyManagement {

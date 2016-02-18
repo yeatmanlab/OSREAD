@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /*import appforliteracy.Learner
 import appforliteracy.Module
 import appforliteracy.Researcher
@@ -12,14 +11,11 @@ import appforliteracy.Researcher
 import appforliteracy.Role
 import appforliteracy.User
 import appforliteracy.UserRole
-=======
-import appforliteracy.Learner
 
 import metafunctionality.Module
 import appforliteracy.Researcher
 import firstexample.FirstExample
 import metafunctionality.ModuleOutput
->>>>>>> master
 
 class BootStrap {
 
@@ -56,7 +52,6 @@ class BootStrap {
         Module module = new Module()
         module.inputID = firstExample.moduleDataID
         module.type = firstExample.type
-<<<<<<< HEAD
         module.save()*/
         
         def adminRole = new Role('ROLE_ADMIN').save()
@@ -89,8 +84,7 @@ class BootStrap {
         assert Role.count() == 3
         assert UserRole.count() == 6
         
-=======
-        module.isCompleted = true
+        /*module.isCompleted = true
 
         ModuleOutput output = new ModuleOutput()
         output.headers = ["word", "accuracy"]
@@ -105,8 +99,7 @@ class BootStrap {
         researcher.save(flush: true)
         learner.save(flush: true)
         module.save(flush: true)
-        output.save(flush: true)
->>>>>>> master
+        output.save(flush: true)*/
     }
     def destroy = {
     }
