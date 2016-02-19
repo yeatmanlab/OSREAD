@@ -31,10 +31,7 @@
                     <g:link controller="Researcher" action="editLearners">Learners</g:link>
                 </li>
                 <li>
-                    <g:link controller="Researcher" action="editModules">Modules</g:link>
-                </li>
-                <li>
-                    <a href="#">My Account</a>
+                    <g:link controller="Researcher" action="home">Home</g:link>
                 </li>
 
             </ul>

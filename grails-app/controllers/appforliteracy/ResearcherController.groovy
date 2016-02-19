@@ -30,8 +30,7 @@ class ResearcherController {
         [fname:r.firstName, learners:r.getLearners()]
     }
 
-    def editLearners(){
-        //Researcher r = Researcher.findByEmail(params.email)
+    def editLearners = {
         render(view:"editLearners.gsp")
     }
 
