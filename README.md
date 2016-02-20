@@ -18,17 +18,17 @@ become "Researcher assigns module with individualized content".
 
 ###Patient performs a module
 1. Patient logs in using the username and password assigned to them by the researcher.
-The log-in for a test user is as follows:
-    Email: example2@gmail.com
-    Password: password
+    The log-in for a test user is as follows:
+        Email: example2@gmail.com
+        Password: password
 2. The Patient chooses the module they wish to play and presses the play button.
 3. Patient performs the module as directed by the module.
 
 ###Researcher views patient progress
 1. Researcher logs in.
-The log-in for a test user is as follows:
-    Email: example@gmail.com
-    Password: password
+    The log-in for a test user is as follows:
+        Email: example@gmail.com
+        Password: password
 2. The Researcher identifies the patient whose progress they wish to view and chooses the
 "View Progress" button listed under that patient's name.
 3. The Researcher identifies the Module and Date they wish to examine and downloads the data
@@ -36,9 +36,9 @@ file associated with those variables.
 
 ###Researcher assigns a modules with individualized content
 1. Researcher logs in.
-The log-in for a test user is as follows:
-    Email: example@gmail.com
-    Password: password
+    The log-in for a test user is as follows:
+        Email: example@gmail.com
+        Password: password
 2. The Researcher identifies the patient to whom they wish to assign a module and chooses the
 "Assign Module" button listed under that patient's name.
 3. The Researcher chooses the module they wish to assign from the list of modules.
@@ -49,10 +49,14 @@ The log-in for a test user is as follows:
 the homepage.
 
 ###Researcher adds new patient
-1. The Researcher chooses the "Learners" option from the top navigation bar.
-2. The Researcher enters the appropriate information about the learner into the
+1. Researcher logs in.
+    The log-in for a test user is as follows:
+        Email: example@gmail.com
+        Password: password
+2. The Researcher chooses the "Learners" option from the top navigation bar.
+3. The Researcher enters the appropriate information about the learner into the
 text boxes in the "Add a Learner" section.
-3. The Researcher chooses the "Save" button.
+4. The Researcher chooses the "Save" button.
 
 ###Researcher adds new module
 This process is outlined in detail below.
