@@ -1,117 +1,222 @@
-Creating a New Module
-Pick a name for the module (Hereafter this will be referred to as TYPE)
+# README
 
-Defining Module Input:
-1. Define a domain for the module input. This domain class must do the following:
--extend the ModuleInput class
--define the module input data as fields in the domain
+# Create New Module
+### 1. Pick a name for your new module
+Herafter this name will be referred to as **TYPE**
+### 2. Create Grails Plugin
+Use the following command to have Grails generate scaffolding code for your new plugin:
+```sh
+$ grails create-plugin TYPE
+```
+
+### 3. Add Dependeny on MetaFunctionality
+```
+repositories {
+    ...
+    maven { url "http://dl.bintray.com/osreadplugins/plugins" }
+}
+```
+```
+dependencies {
+    ...
+    compile "org.grails.plugins:MetaFunctionality:0.1"
+    ...
+}
+```
+
+##### Note - The following classes must exist in a package named type (TYPE in all lower case)
+
+### 4. Create Input Domain
+In the domains folder create a domain class with name TYPE
+
+This domain class must do the following:
+
+- extend the ModuleInput class
+
+- define the module input data as fields in the domain
+- This is where you are able to define the input you want to take in when the module is assigned
 
 Example:
-
+```
 class FirstExample extends ModuleInput {
-
     static hasMany = [words: String]
     List words
 }
+```
 
-2. Define the configuration of your module input in the module-input-configuration/input-config.txt:
+### 5. Create FetchInputHeadersService
 
-The config file entry must take the following form:
-TYPE
-{
-	fieldName: dataType
-}
+In the services folder create a new service named FetchInputHeadersService.
 
-The following dataTypes are accepted as input:
-String
-Integer
-Double
-Boolean
+Within this service define a method that returns a Map<String, String> that represents a mapping from the fields defined in the domain class to their respective data types.
+
+The following data types are accepted as input:
+- String
+- Integer
+- Double
+- Boolean
 
 or any arrays of the above types:
-[String]
-[Integer]
-[Double]
-[Boolean]
+- [String]
+- [Integer]
+- [Double]
+- [Boolean]
 
 Example:
-FirstExampleInput
-{
-    words: [String]
+```
+class FetchInputHeadersService {
+    def getHeaders () {
+        Map<String, String> headers = new LinkedHashMap<>()
+        headers.put("words", "[String]")
+        return headers
+    }
 }
+```
+### 6. Create Start Controller
+Create a controller to serve as the entry point of the module.
 
-3. Define an input file and test:
+This controller must be named TYPEController.
 
-The input file must take this form:
+The controller must have a method start()
 
-{
-	"type": "TYPE",
-	"name": "Module Name",
-	"field1Name": "Field 1 Input"
-	"field2Name": "Field 2 Input"
-	...
+This method will be passed the moduleID of the module through params.id which can be used to get the associated Module object by calling Module.findByModuleID(params.id)
+
+Example:
+```
+import firstexample.FirstExample
+import metafunctionality.Module
+import metafunctionality.ModuleOutput
+
+class FirstExampleController {
+
+    def start() {
+        String inputID = Module.findByModuleId(params.id).inputID
+        FirstExample input = FirstExample.findByModuleDataID(inputID)
+        List<String> rc = input.words
+        //Store Module in saveModuleService
+        [words: words]
+    }
+}    
+```
+### 7. Save Output
+At the end of the module you must save the output that you wish to pass out of the module with the Module object that was passed in.
+
+To do so you must create a ModuleOutput object and store within it the desired headers and rows of comma-separated values.
+
+Finally store the ModuleDataID of the ModuleOutput object in the Module object.
+
+This ModuleOutput object will be translated into a .CSV file with the associated headers and comma-separated rows of data.
+
+Example:
+```
+def submit() {
+    List<String> valueRows = new ArrayList<String>()
+    ModuleOutput output = new ModuleOutput()
+    output.headers = ["word", "accuracy"]
+    
+    output.valueRows = params.data
+    
+    Module m = //load from saveModuleService
+    if (m.outputIDs != null) {
+        m.outputIDs.add(output.moduleDataID)
+    } else {
+        m.outputIDs = [output.moduleDataID]
+    }
+    output.type = "FirstExample"
+    m.save(flush: true)
+    output.save(flush: true)
+    
+    //redirect to learner home
+    redirect(controller: "appforliteracy.FileOutput", action: "output", params:     [id: output.moduleDataID])
 }
+```
 
-Example: 
-{
-	"type": "FirstExampleInput",
-	"name": "Example Input 1",
-	"words": [
-		"Micha",
-		"Loves",
-		"Magic"			
-	]
+### 8. Publish Plugin to Remote Maven Repository
+
+Once you have completed your module you must publish it to the Maven repository.
+
+There are several steps to do this:
+
+##### 1. Create an account with bintray.com
+##### 2. Request to join the organization osreadplugins
+##### 3. Once your request is approved, add the following to your build.gradle file:
+```
+plugins {
+    ...
+    id "com.jfrog.bintray" version "1.2"
 }
+```
 
-Program the Module:
+```
+bintray {
+    user = "username"
+    key = "apikey"
+    publications = ['maven']
+    publish = true
+    pkg {
+        userOrg = 'osreadplugins'
+        name = "TYPE"
+        issueTrackerUrl = "https://github.com/username/TYPE/issues" 
+        vcsUrl = "https://github.com/username/grails-TYPE"
+        version {
+            attributes = ['grails-plugin': "org.osread:TYPE"]
+            name = 0.1
+        }
+    }
+}
+```
 
-There are only three requirements when programming a new App for Literacy module:
+Your API Key can be found under 'Edit your profile'
 
-1. It must be programmed within the grails framework. If you have no experience with this here is a solid tutorial that will get you started: http://grails.asia/grails-tutorial-for-beginners/
+##### 4. Publish your plugin
+Enter the following command at your project root:
+```sh
+$ grails gradle bintrayUpload
+```
 
--Programming within the grails framework also means that you will need to properly place the files you are adding.
+##### 5. Verify Upload
+You should now be able to navigate to https://bintray.com/osreadplugins/plugins
+and see your plugin!
 
-Controllers should be placed in AppForLiteracy/grails-app/controllers/appforliteracy
+### 9. Add Dependencies into the OsREAD Main Application
+Once you have published your plugin to the Maven repository you are now ready to integrate it into the main application!
 
-Views should be placed under the appropriate controller folder in AppForLiteracy/grails-app/views
+Two things are required to do this:
+##### 1. Add Dependency
+Add the following line to the AppForLiteracy/build.gradle file:
+```
+dependencies {
+    ...  
+    compile "org.grails.plugins:TYPE:version" //version is specified in the build.gradle file of your plugin under the name field of version
+    ...
+}
+```
 
-Any services you need should be placed in AppForLiteracy/grails-app/services/appforliteracy
+##### 2. Add Your TYPE to ModuleListService
+```
+class ModuleListService {
 
-Paste the following under the <content> tag in TYPE.iml:
+    static List<String> getModuleNames() {
+        List<String> names = new ArrayList<>()
+        names.add("FirstExample")
+        names.add("TYPE")
 
-	  <sourceFolder url="file://$MODULE_DIR$/grails-app/controllers" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/grails-app/domain" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/grails-app/init" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/grails-app/services" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/grails-app/taglib" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/grails-app/utils" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/groovy" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../ExampleModule/src/main/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/integration-test/groovy" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../ExampleModule/src/integrationTest/groovy" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../ExampleModule/src/integrationTest/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/groovy" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../ExampleModule/src/test/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/grails-app/conf" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/grails-app/i18n" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/grails-app/views" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/../ExampleModule/src/main/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/../ExampleModule/src/integrationTest/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/../ExampleModule/src/test/resources" type="java-test-resource" />
-      <excludeFolder url="file://$MODULE_DIR$/../ExampleModule/.gradle" />
-      <excludeFolder url="file://$MODULE_DIR$/../ExampleModule/build" />
+        //TODO: Add additional module names here
 
-This will enable Grails to recognize the controllers, domains, and services you create.
+        return names
+    }
+}
+```
 
-Delete grails-app/init/Bootstrap.groovy
-
-
-
-
-
-
-
-
-
-
-
+You're new module should be completely functional! Test it by assigning the module with a module input file that matches your specified input plus name and type fields.
+Example:
+```
+{
+  "type": "FirstExample",
+  "name": "Example Input",
+  "words": [
+      "Reading",
+      "is",
+      "cool!"
+  ]    
+}

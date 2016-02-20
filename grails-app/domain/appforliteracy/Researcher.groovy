@@ -1,15 +1,16 @@
 package appforliteracy
 
-class Researcher extends User {
+import appforliteracy.User
+
+class Researcher {
     
+    User user
     String position
     static hasMany = [learnerIDs: String]
     List learnerIDs
     
-    Researcher(String email, String password) {
-	this()
-	this.email = email
-	this.password = password
+    Researcher(User user) {
+        this.user = user
     }
     
     static constraints = {

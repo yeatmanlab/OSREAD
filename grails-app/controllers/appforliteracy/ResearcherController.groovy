@@ -1,142 +1,61 @@
 package appforliteracy
 
-<<<<<<< HEAD
-class ResearcherController extends grails.plugin.springsecurity.ui.UserController {
-=======
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
-class ResearcherController {
+class ResearcherController extends grails.plugin.springsecurity.ui.UserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    @Secured('ROLE_RESEARCHER')
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Researcher.list(params), model:[researcherCount: Researcher.count()]
     }
 
+    @Secured('ROLE_RESEARCHER')
     def show(Researcher researcher) {
         respond researcher
     }
-
-    def assign = {
+    
+    @Secured('ROLE_RESEARCHER')
+    def assign() {
         redirect(controller: "fileInput", action: "list", id: params.learnerID)
     }
 
-    def progress = {
+    @Secured('ROLE_RESEARCHER')
+    def progress() {
         redirect(controller: "fileOutput", action: "output", id: params.learnerID)
     }
-
-    def login(){
-        Researcher r = Researcher.findByEmail(params.email)
-        if (r.password == params.password){
-            //render(view:"home.gsp")
-            home(r)
-        } else {
-            render(view:"../login/login.gsp")
-
-        }
+    
+    @Secured('ROLE_RESEARCHER')
+    def home() {
+        Researcher r = Researcher.user.getCurrentUser(params.email)
+        //[fname:r.firstName, learners:r.getLearners()]
+        [fname:r.user.firstName]
     }
-
-    def home(Researcher r){
-        //render(view:"home.gsp", model:[name:r.firstName])
-
-        render(view:"home.gsp", model:[fname:r.firstName, learners:r.getLearners()])
-    }
-
+    
+    @Secured('ROLE_RESEARCHER')
     def editLearners(){
-        Researcher r = Researcher.findByEmail(params.email)
-        render(view:"editLearners.gsp", model:[learners:r.learnerIDs])
+        Researcher r = Researcher.user.findByEmail(params.email)
+        render(view:"editLearners.gsp")
     }
 
-    def create() {
-        respond new Researcher(params)
+    @Secured('ROLE_RESEARCHER')
+    def viewProgress(){
+        render(view:"../learner/viewProgress.gsp", model:[id:params.id])
+    }
+    
+    @Secured('ROLE_RESEARCHER')
+    def editModules(){
+        render(view:"editModules.gsp")
+    }
+    
+    @Secured('ROLE_RESEARCHER')
+    def myAccount(){
+        render('Under construction')
     }
 
-    @Transactional
-    def save(Researcher researcher) {
-        if (researcher == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
-
-        if (researcher.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond researcher.errors, view:'create'
-            return
-        }
-
-        researcher.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'researcher.label', default: 'Researcher'), researcher.userID])
-                redirect researcher
-            }
-            '*' { respond researcher, [status: CREATED] }
-        }
-    }
-
-    def edit(Researcher researcher) {
-        respond researcher
-    }
-
-    @Transactional
-    def update(Researcher researcher) {
-        if (researcher == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
-
-        if (researcher.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond researcher.errors, view:'edit'
-            return
-        }
-
-        researcher.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'researcher.label', default: 'Researcher'), researcher.userID])
-                redirect researcher
-            }
-            '*'{ respond researcher, [status: OK] }
-        }
-
-    }
-
-    @Transactional
-    def delete(Researcher researcher) {
-
-        if (researcher == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
-
-        researcher.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'researcher.label', default: 'Researcher'), researcher.userID])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
-    }
-
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'researcher.label', default: 'Researcher'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
-    }
->>>>>>> master
 }
