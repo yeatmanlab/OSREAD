@@ -1,4 +1,37 @@
 # README
+
+# Running the Application
+
+Download sdkman
+```sh
+$ $ curl -s get.sdkman.io | bash
+```
+Initialize sdkman
+```sh
+$ source "$HOME/.sdkman/bin/sdkman-init.sh"
+```
+If unsuccessful make sure you have Java installed 
+
+Confirm installation
+```sh
+$ sdk version
+```
+Download grails, gradle, and groovy
+```sh
+$ sdk install grails 3.0.11
+$ sdk install groovy
+$ sdk install gradle
+```
+Clone the repository
+```sh
+$ git clone https://github.com/uwcse481h2016/AppForLiteracy
+$ cd AppForLiteracy
+```
+Run the application!
+```sh 
+$ grails run-app
+```
+
 # User Guide:
 The tasks we laid out to accomplish in our task analysis:
 
