@@ -28,9 +28,9 @@ class LearnerController extends grails.plugin.springsecurity.ui.UserController {
 
     @Secured('ROLE_USER')
     def home() {
-        Learner r = Learner.user.findByEmail(params.email)
-        //[fname:r.user.firstName, modules:r.getModules()]
-        [fname:r.user.firstName]
+        Learner r = Learner.findByEmail(params.email)
+        //[fname:r.firstName, modules:r.getModules()]
+        [fname:r.firstName]
     }
 
     @Secured('ROLE_USER')

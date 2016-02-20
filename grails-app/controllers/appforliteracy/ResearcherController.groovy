@@ -32,14 +32,13 @@ class ResearcherController extends grails.plugin.springsecurity.ui.UserControlle
     
     @Secured('ROLE_RESEARCHER')
     def home() {
-        Researcher r = Researcher.user.getCurrentUser(params.email)
-        //[fname:r.firstName, learners:r.getLearners()]
-        [fname:r.user.firstName]
+        Researcher r = Researcher.getCurrentUser(params.email)
+        [fname:r.firstName, learners:r.getLearners()]
     }
     
     @Secured('ROLE_RESEARCHER')
     def editLearners(){
-        Researcher r = Researcher.user.findByEmail(params.email)
+        Researcher r = Researcher.getCurrentUser(params.email)
         render(view:"editLearners.gsp")
     }
 
