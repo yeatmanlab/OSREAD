@@ -1,5 +1,99 @@
 # README
 
+# Running the Application
+
+Download sdkman
+```sh
+$ $ curl -s get.sdkman.io | bash
+```
+Initialize sdkman
+```sh
+$ source "$HOME/.sdkman/bin/sdkman-init.sh"
+```
+If unsuccessful make sure you have Java installed 
+
+Confirm installation
+```sh
+$ sdk version
+```
+Download grails, gradle, and groovy
+```sh
+$ sdk install grails 3.0.11
+$ sdk install groovy
+$ sdk install gradle
+```
+Clone the repository
+```sh
+$ git clone https://github.com/uwcse481h2016/AppForLiteracy
+$ cd AppForLiteracy
+```
+Run the application!
+```sh 
+$ grails run-app
+```
+
+# User Guide:
+The tasks we laid out to accomplish in our task analysis:
+
+- Patient takes an assessment
+- Patient performs an exercise
+- Researcher views patient progress
+- Researcher modifies assigned modules
+- Researcher adds new patient
+- Researcher adds new module
+
+After additional meetings with our stakeholders, we combined the "Patient takes an assessment"
+and the "Patient performs an exercise" into one task, which we will refer to as "Patient
+performs a module", which serves the purpose of both previous tasks.
+
+Additionally, the task "Researcher modified assigned modules", has been further fleshed out to
+become "Researcher assigns module with individualized content".
+
+###Patient performs a module
+1. Patient logs in using the username and password assigned to them by the researcher.
+    The log-in for a test user is as follows:
+        Email: example2@gmail.com
+        Password: password
+2. The Patient chooses the module they wish to play and presses the play button.
+3. Patient performs the module as directed by the module.
+
+###Researcher views patient progress
+1. Researcher logs in.
+    The log-in for a test user is as follows:
+        Email: example@gmail.com
+        Password: password
+2. The Researcher identifies the patient whose progress they wish to view and chooses the
+"View Progress" button listed under that patient's name.
+3. The Researcher identifies the Module and Date they wish to examine and downloads the data
+file associated with those variables.
+
+###Researcher assigns a modules with individualized content
+1. Researcher logs in.
+    The log-in for a test user is as follows:
+        Email: example@gmail.com
+        Password: password
+2. The Researcher identifies the patient to whom they wish to assign a module and chooses the
+"Assign Module" button listed under that patient's name.
+3. The Researcher chooses the module they wish to assign from the list of modules.
+4. The Researcher uploads the individualized content in a JSON file.
+    The content for the test module is listed as "simple.txt".
+5. The Researcher chooses the "Assign" button.
+6. The Researcher can choose between two labeled buttons to assign more modules or return to
+the homepage.
+
+###Researcher adds new patient
+1. Researcher logs in.
+    The log-in for a test user is as follows:
+        Email: example@gmail.com
+        Password: password
+2. The Researcher chooses the "Learners" option from the top navigation bar.
+3. The Researcher enters the appropriate information about the learner into the
+text boxes in the "Add a Learner" section.
+4. The Researcher chooses the "Save" button.
+
+###Researcher adds new module
+This process is outlined in detail below.
+
 # Create New Module
 ### 1. Pick a name for your new module
 Herafter this name will be referred to as **TYPE**

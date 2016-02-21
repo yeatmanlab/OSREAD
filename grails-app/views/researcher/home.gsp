@@ -36,6 +36,7 @@
                 </li>
                 <li>
                     <g:link controller="Researcher" action="myAccount">My Account</g:link>
+                    <g:link controller="Researcher" action="home">Home</g:link>
                 </li>
 
             </ul>
@@ -67,6 +68,9 @@
                     <h3>${user.firstName} ${user.lastName}</h3>
                     %{--<p>Put information about ${learner.firstName} here.</p>--}%
                     <g:hiddenField name="learnerID" value="${user.id}" />
+                    <h3>${learner.firstName} ${learner.lastName}</h3>
+                    %{--<p>Put information about ${learner.firstName} here.</p>--}%
+                    <g:hiddenField name="learnerID" value="${learner.userID}" />
 
                     <g:actionSubmit class="btn btn-primary" href="#" value="View Progress" action="progress" />
 

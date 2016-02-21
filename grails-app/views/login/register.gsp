@@ -19,14 +19,15 @@
 
 <div class="container">
     <h2 class="form-signin-heading">Register</h2>
-    <g:form controller="user" action="save" class="form">
-        <label for="firstName">First Name:</label><g:textField name="user.firstName"/><br/>
+    
+    <g:form controller="researcher" action="create" class="form">
+        <label for="firstName">First Name:</label><g:textField name="firstName"/><br/>
 
-        <label for="lastName">Last Name:</label><g:textField name="user.lastName"/><br/>
+        <label for="lastName">Last Name:</label><g:textField name="lastName"/><br/>
 
-        <label for="email">Email:</label><g:textField name="user.email"/><br/>
+        <label for="email">Email:</label><g:textField name="email"/><br/>
 
-        <label for="password">Password:</label><g:textField name="user.password"/><br/>
+        <label for="password">Password:</label><g:textField name="password"/><br/>
         
         <g:actionSubmit value="Save" action="save"/>
 

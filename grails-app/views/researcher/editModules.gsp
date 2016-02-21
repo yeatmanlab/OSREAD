@@ -23,6 +23,7 @@
 
 
 
+<<<<<<< HEAD
              <ul class="nav navbar-nav">
                 <li>
                     <g:link controller='logout'>Logout</g:link>
@@ -35,6 +36,8 @@
                 </li>
                 <li>
                     <g:link controller="Researcher" action="myAccount">My Account</g:link>
+                <li>
+                    <g:link controller="Researcher" action="home">Home</g:link>
                 </li>
 
             </ul>

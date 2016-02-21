@@ -26,6 +26,7 @@
                 </li>
                 <li>
                     <a href="#">My Account</a>
+                    <g:link controller="Researcher" action="home">Home</g:link>
                 </li>
 
             </ul>
