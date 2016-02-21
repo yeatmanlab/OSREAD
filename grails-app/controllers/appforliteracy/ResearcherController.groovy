@@ -57,4 +57,33 @@ class ResearcherController extends grails.plugin.springsecurity.ui.UserControlle
         render('Under construction')
     }
 
+    @Transactional
+    def delete(Researcher researcher) {
+
+        if (researcher == null) {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        researcher.delete flush:true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'researcher.label', default: 'Researcher'), researcher.userID])
+                redirect action:"index", method:"GET"
+            }
+            '*'{ render status: NO_CONTENT }
+        }
+    }
+
+    protected void notFound() {
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'researcher.label', default: 'Researcher'), params.id])
+                redirect action: "index", method: "GET"
+            }
+            '*'{ render status: NOT_FOUND }
+        }
+    }
 }

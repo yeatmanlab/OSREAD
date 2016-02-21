@@ -1,3 +1,4 @@
+import appforliteracy.Learner
 import appforliteracy.Module
 //import appforliteracy.moduleInputDomains.FirstExample
 //import appforliteracy.moduleInputDomains.SecondExample
@@ -93,6 +94,7 @@ class BootStrap {
 //        output.headers = ["word", "accuracy"]
 //        output.valueRows = ["Hello,100"]
 //        output.type = "FirstExample"
+        /*module.isCompleted = true
 
 //        module.outputIDs = [output.moduleDataID]
 
@@ -106,6 +108,11 @@ class BootStrap {
 
         //module.save(flush: true)
         //output.save(flush: true)
+        firstExample.save(flush: true)
+        researcher.save(flush: true)
+        learner.save(flush: true)
+        module.save(flush: true)
+        output.save(flush: true)*/
     }
     def destroy = {
     }
