@@ -3,17 +3,15 @@ package appforliteracy
 import grails.test.mixin.*
 import spock.lang.*
 
-<<<<<<< HEAD:src/test/groovy/appforliteracy/UserControllerSpec.groovy
-@TestFor(UserController)
+/*@TestFor(UserController)
 @Mock(User)
-class UserControllerSpec extends Specification {
-=======
+class UserControllerSpec extends Specification {*/
+
 /**
  * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
  */
 @TestFor(FileOutputController)
 class FileOutputControllerSpec extends Specification {
->>>>>>> master:src/test/groovy/appforliteracy/FileOutputControllerSpec.groovy
 
     def populateValidParams(params) {
         assert params != null

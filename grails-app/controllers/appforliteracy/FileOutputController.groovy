@@ -14,6 +14,7 @@ class FileOutputController {
 
     def downloadFile = {
         ModuleOutput output = ModuleOutput.findByModuleDataID(params.outputID)
+        //String fileName = output.type + ".csv" //TODO: Better name
         String fileName = output.type + output.dateString() + ".csv" //TODO: Better name
         try {
             FileWriter writer = new FileWriter(fileName)

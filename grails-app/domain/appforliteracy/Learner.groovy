@@ -1,19 +1,25 @@
 package appforliteracy
 
 import metafunctionality.Module
+import appforliteracy.User
 
 class Learner extends User {
-
+    
+    //User user
     Date dateOfBirth
     String disability
     String researcherID
     static hasMany = [moduleIDs: String]
     List moduleIDs
-    
-    Learner(String email, String password) {
-	this()
+
+    /*Learner(User user) {
+        //this.user = user
+    }*/
+    Learner(String email, String password, String lastName, String firstName) {
 	this.email = email
 	this.password = password
+        this.lastName = lastName
+        this.firstName = firstName
     }
     
     static constraints = {
@@ -24,7 +30,7 @@ class Learner extends User {
     }
 
     def getResearcher () {
-        return Researcher.findByUserID(researcherID)
+        return Researcher.findById(researcherID)
     }
 
     def getModules () {

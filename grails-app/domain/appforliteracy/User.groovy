@@ -11,21 +11,23 @@ class User implements Serializable {
 
     transient springSecurityService
     
+    //String userID = UUID.randomUUID().toString()
     String email
     String password
     boolean enabled = true
     String lastName
     String firstName
-    //String id = UUID.randomUUID().toString()
     boolean accountExpired
     boolean accountLocked
     boolean passwordExpired
-    boolean isResearcher
+    boolean beforeInsertRunOnce = false
+    boolean beforeUpdateRunOnce = false
 
-    User(String email, String password) {
-	this()
+    User(String email, String password, String lastName, String firstName) {
 	this.email = email
 	this.password = password
+        this.lastName = lastName
+        this.firstName = firstName
     }
 
     Set<Role> getAuthorities() {
@@ -33,19 +35,31 @@ class User implements Serializable {
     }
 
     def beforeInsert() {
-	encodePassword()
+        if (!beforeInsertRunOnce) {
+            beforeInsertRunOnce = true
+            encodePassword()
+        }   
+    }
+    
+    def afterInsert() {
+        beforeInsertRunOnce = false
     }
 
     def beforeUpdate() {
-	if (isDirty('password')) {
+	if (isDirty('password') && !beforeUpdateRunOnce) {
+            beforeUpdateRunOnce = true
             encodePassword()
         }
+    }
+    
+    def afterUpdate() {
+        beforeUpdateRunOnce = false
     }
 
     protected void encodePassword() {
 	password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password   
     }
-
+    
     static transients = ['springSecurityService']
 
     static constraints = {

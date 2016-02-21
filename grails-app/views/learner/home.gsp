@@ -26,18 +26,11 @@
 
             <ul class="nav navbar-nav">
                 <li>
-                    <g:link controller='logout'>Logout</g:link>
+                    <a href="#">Log Out</a>
                 </li>
                 <li>
-                    <g:link controller="Researcher" action="editLearners">Learners</g:link>
+                    <g:link action="viewProgress">View Your Progress!</g:link>
                 </li>
-                <li>
-                    <g:link controller="Researcher" action="editModules">Modules</g:link> 
-                </li>
-                <li>
-                    <g:link controller="Researcher" action="myAccount">My Account</g:link>
-                </li>
-
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -56,27 +49,33 @@
             </h1>
         </div>
     </div>
-    <!-- /.row -->
+<!-- /.row -->
 
 
-    <g:each in="${users}" var="user">
-        <div class="row" id="learners">
-            <g:form>
-                <div class="col-md-5">
+    <g:if test="${modules.size() > 0}">
+    <h2>You have new activities to do!</h2>
+    <h3>Choose an activity below.</h3>
+        <g:each in="${modules}" var="p">
 
-                    <h3>${user.firstName} ${user.lastName}</h3>
-                    %{--<p>Put information about ${learner.firstName} here.</p>--}%
-                    <g:hiddenField name="learnerID" value="${user.id}" />
-
-                    <g:actionSubmit class="btn btn-primary" href="#" value="View Progress" action="progress" />
-
-                    <g:actionSubmit class="btn btn-primary" href="#" value="Assign Module" action="assign" />
-
+                <div class="row" id="modules">
+                    <div class="col-md-5">
+                        <g:form>
+                            <h5>${p.type}</h5>
+                            <g:hiddenField name="id" value="${p.moduleId}" />
+                            <g:hiddenField name="type" value="${p.type}" />
+                            <g:hiddenField name="test" value="test" />
+                            <g:actionSubmit value="Play ${p.type}" action="startModule" class="btn btn-primary" />
+                        </g:form>
+                    </div>
                 </div>
-            </g:form>
-        </div>
-    </g:each>
-    <hr>
+        </g:each>
+        <hr>
+    </g:if>
+    <g:else>
+        <h2>You do not have new activities yet!</h2>
+        <h3>Check back soon!<h3>
+    </g:else>
+
 
 </div>
 <!-- /.container -->

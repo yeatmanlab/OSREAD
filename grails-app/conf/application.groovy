@@ -5,10 +5,13 @@ grails.plugin.springsecurity.userLookup.userDomainClassName = 'appforliteracy.Us
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'appforliteracy.UserRole'
 grails.plugin.springsecurity.userLookup.usernamePropertyName = 'email'
 grails.plugin.springsecurity.authority.className = 'appforliteracy.Role'
-grails.plugin.springsecurity.rejectIfNoRule = false
-grails.plugin.springsecurity.fii.rejectPublicInvocations = false
-//grails.plugin.springsecurity.auth.loginFormUrl = '/login/auth'
-grails.plugin.springsecurity.logout.afterLogoutUrl = '/login/auth'
+//grails.plugin.springsecurity.rejectIfNoRule = false
+//grails.plugin.springsecurity.fii.rejectPublicInvocations = false
+grails.plugin.springsecurity.auth.loginFormUrl = '/login'
+grails.plugin.springsecurity.failureHandler.defaultFailureUrl = '/login/auth'
+grails.plugin.springsecurity.logout.afterLogoutUrl = '/'
+grails.plugin.springsecurity.logout.alwaysUseDefaultTargetUrl = true
+grails.plugin.springsecurity.logout.postOnly = false
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	[pattern: '/',               access: ['permitAll']],
 	[pattern: '/error',          access: ['permitAll']],
@@ -20,6 +23,26 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	[pattern: '/**/css/**',      access: ['permitAll']],
 	[pattern: '/**/images/**',   access: ['permitAll']],
 	[pattern: '/**/favicon.ico', access: ['permitAll']]
+]
+
+grails.plugin.springsecurity.securityConfigType = "InterceptUrlMap"
+grails.plugin.springsecurity.interceptUrlMap = [
+   [pattern: '/',               access: ['ROLE_RESEARCHER']],
+   [pattern: '/error',          access: ['permitAll']],
+   [pattern: '/index',          access: ['permitAll']],
+   [pattern: '/index.gsp',      access: ['permitAll']],
+   [pattern: '/shutdown',       access: ['permitAll']],
+   [pattern: '/assets/**',      access: ['permitAll']],
+   [pattern: '/**/js/**',       access: ['permitAll']],
+   [pattern: '/**/css/**',      access: ['permitAll']],
+   [pattern: '/**/images/**',   access: ['permitAll']],
+   [pattern: '/**/favicon.ico', access: ['permitAll']],
+   [pattern: '/login',          access: ['permitAll']],
+   [pattern: '/login/**',       access: ['permitAll']],
+   [pattern: '/logout',         access: ['permitAll']],
+   [pattern: '/logout/**',      access: ['permitAll']],
+   [pattern: '/researcher/**',  access: ['ROLE_RESEARCHER']],
+   [pattern: '/learner/**',     access: ['IS_AUTHENTICATED_FULLY']]
 ]
 
 grails.plugin.springsecurity.filterChain.chainMap = [
