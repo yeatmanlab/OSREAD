@@ -23,7 +23,6 @@
 
 
 
-<<<<<<< HEAD
              <ul class="nav navbar-nav">
                 <li>
                     <g:link controller='logout'>Logout</g:link>
