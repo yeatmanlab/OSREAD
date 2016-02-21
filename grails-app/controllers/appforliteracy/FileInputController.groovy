@@ -17,10 +17,14 @@ class FileInputController {
 
     def upload = {
         def f = request.getFile('fileUpload')
-        String myString = IOUtils.toString(f.getInputStream(), "UTF-8")
-        JSONObject input = new JSONObject(myString)
-        String type = input.type
-        if(params.moduleTypes.equals(type)) {
+        if(f.isEmpty()) {
+            render("Please select a file")
+        } else if(params.moduleTypes == null) {
+            render("Please select a module type")
+        } else if(params.moduleTypes.equals(type)) {
+            String myString = IOUtils.toString(f.getInputStream(), "UTF-8")
+            JSONObject input = new JSONObject(myString)
+            String type = input.type
             List<String> keys
             try {
                 ParseDataService parser = new ParseDataService()
@@ -51,8 +55,8 @@ class FileInputController {
             [id: params.learnerID]
 
         } else {
-            throw new IllegalStateException("Input file of wrong type")
-            //TODO: Custom exception
+            //throw new IllegalStateException("Input file of wrong type")
+            render("Input file of wrong type")
         }
     }
 
