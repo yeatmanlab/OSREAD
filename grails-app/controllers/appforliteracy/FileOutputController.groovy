@@ -7,7 +7,7 @@ import metafunctionality.Module
 class FileOutputController {
 
     def output() {
-        Learner learner = Learner.findByUserID(params.id)
+        Learner learner = Learner.findById(params.id)
         List<Module> modules = learner.getModules()
         [modules: modules]
     }

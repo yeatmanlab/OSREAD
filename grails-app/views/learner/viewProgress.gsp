@@ -22,7 +22,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#">Log Out</a>
+                    <g:link controller='logout'>Logout</g:link>
                 </li>
                 <li>
                     <g:link action="viewProgress">View Your Progress!</g:link>
@@ -55,4 +55,5 @@
 </div>
 
 </body>
+
 </html>
