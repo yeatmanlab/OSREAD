@@ -26,10 +26,13 @@
 
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#">Log Out</a>
+                    <g:link controller='logout'>Logout</g:link>
                 </li>
                 <li>
                     <g:link controller="Researcher" action="editLearners">Learners</g:link>
+                </li>
+                <li>
+                    <g:link controller="Researcher" action="editModules">Modules</g:link> 
                 </li>
                 <li>
                     <g:link controller="Researcher" action="home">Home</g:link>
@@ -56,11 +59,14 @@
     <!-- /.row -->
 
 
-    <g:each in="${learners}" var="learner">
+    <g:each in="${users}" var="user">
         <div class="row" id="learners">
             <g:form>
                 <div class="col-md-5">
 
+                    <h3>${user.firstName} ${user.lastName}</h3>
+                    %{--<p>Put information about ${learner.firstName} here.</p>--}%
+                    <g:hiddenField name="learnerID" value="${user.id}" />
                     <h3>${learner.firstName} ${learner.lastName}</h3>
                     %{--<p>Put information about ${learner.firstName} here.</p>--}%
                     <g:hiddenField name="learnerID" value="${learner.userID}" />

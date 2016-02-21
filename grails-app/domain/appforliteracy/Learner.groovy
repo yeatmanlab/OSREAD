@@ -1,27 +1,39 @@
 package appforliteracy
 
 import metafunctionality.Module
+import appforliteracy.User
 
 class Learner extends User {
-
+    
+    //User user
     Date dateOfBirth
     String disability
-    String researcherID
+    long researcherID
     static hasMany = [moduleIDs: String]
     List moduleIDs
+
+    /*Learner(User user) {
+        //this.user = user
+    }*/
+    Learner(String email, String password, String lastName, String firstName) {
+	this.email = email
+	this.password = password
+        this.lastName = lastName
+        this.firstName = firstName
+    }
+    
+    Learner() {
+    }
     
     static constraints = {
-        dateOfBirth blank: false
-        disability blank: false
-        researcherID blank: false
-        /*researcher validator: {
-            if (!Researcher.list().contains(researcher)) return ['entryMissing']
-        }*/
+        dateOfBirth nullable: true
+        disability nullable: true
+        researcherID nullable: true
         moduleIDs nullable: true
     }
 
     def getResearcher () {
-        return Researcher.findByUserID(researcherID)
+        return Researcher.findById(researcherID)
     }
 
     def getModules () {

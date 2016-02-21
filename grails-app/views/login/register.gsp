@@ -19,6 +19,7 @@
 
 <div class="container">
     <h2 class="form-signin-heading">Register</h2>
+
     <g:form controller="researcher" action="create" class="form">
         <label for="firstName">First Name:</label><g:textField name="firstName"/><br/>
 
@@ -27,8 +28,8 @@
         <label for="email">Email:</label><g:textField name="email"/><br/>
 
         <label for="password">Password:</label><g:textField name="password"/><br/>
-
-        <g:actionSubmit value="Save" action="create"/>
+        
+        <g:actionSubmit value="Save" action="save"/>
 
     </g:form>
 

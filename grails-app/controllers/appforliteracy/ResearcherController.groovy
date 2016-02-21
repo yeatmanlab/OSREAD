@@ -2,103 +2,61 @@ package appforliteracy
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
-class ResearcherController {
+class ResearcherController extends grails.plugin.springsecurity.ui.UserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    def springSecurityService
 
+    @Secured('ROLE_RESEARCHER')
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Researcher.list(params), model:[researcherCount: Researcher.count()]
     }
 
+    @Secured('ROLE_RESEARCHER')
     def show(Researcher researcher) {
         respond researcher
     }
-
-    def assign = {
+    
+    @Secured('ROLE_RESEARCHER')
+    def assign() {
         redirect(controller: "fileInput", action: "list", id: params.learnerID)
     }
 
-    def progress = {
+    @Secured('ROLE_RESEARCHER')
+    def progress() {
         redirect(controller: "fileOutput", action: "output", id: params.learnerID)
     }
-
-    def home = {
-        Researcher r = Researcher.findByUserID(params.id)
-        [fname:r.firstName, learners:r.getLearners()]
+    
+    @Secured('ROLE_RESEARCHER')
+    def home() {
+        def researcher = springSecurityService.currentUser
+        //def firstName = researcher.firstName
+        [fname:researcher.firstName, learners:researcher.getLearners()]
     }
-
-    def editLearners = {
+    
+    @Secured('ROLE_RESEARCHER')
+    def editLearners(){
+        def researcher = springSecurityService.currentUser
         render(view:"editLearners.gsp")
     }
 
+    @Secured('ROLE_RESEARCHER')
     def viewProgress(){
         render(view:"../learner/viewProgress.gsp", model:[id:params.id])
     }
-
-    def assignModules(){
-        render(view:"../learner/assignModules.gsp")
+    
+    @Secured('ROLE_RESEARCHER')
+    def editModules(){
+        render(view:"editModules.gsp")
     }
-
-    def create() {
-        respond new Researcher(params)
-    }
-
-    @Transactional
-    def save(Researcher researcher) {
-        if (researcher == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
-
-        if (researcher.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond researcher.errors, view:'create'
-            return
-        }
-
-        researcher.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'researcher.label', default: 'Researcher'), researcher.userID])
-                redirect researcher
-            }
-            '*' { respond researcher, [status: CREATED] }
-        }
-    }
-
-    def edit(Researcher researcher) {
-        respond researcher
-    }
-
-    @Transactional
-    def update(Researcher researcher) {
-        if (researcher == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
-
-        if (researcher.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond researcher.errors, view:'edit'
-            return
-        }
-
-        researcher.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'researcher.label', default: 'Researcher'), researcher.userID])
-                redirect researcher
-            }
-            '*'{ respond researcher, [status: OK] }
-        }
-
+    
+    @Secured('ROLE_RESEARCHER')
+    def myAccount(){
+        render('Under construction')
     }
 
     @Transactional
@@ -131,4 +89,3 @@ class ResearcherController {
         }
     }
 }
-

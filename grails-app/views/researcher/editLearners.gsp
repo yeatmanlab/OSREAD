@@ -25,12 +25,18 @@
 
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#">Log Out</a>
+                    <g:link controller='logout'>Logout</g:link>
                 </li>
                 <li>
                     <g:link controller="Researcher" action="editLearners">Learners</g:link>
                 </li>
                 <li>
+<<<<<<< HEAD
+                    <g:link controller="Researcher" action="editModules">Modules</g:link> 
+                </li>
+                <li>
+=======
+>>>>>>> origin/master
                     <g:link controller="Researcher" action="home">Home</g:link>
                 </li>
 

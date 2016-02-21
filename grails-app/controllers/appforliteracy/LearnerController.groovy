@@ -2,30 +2,44 @@ package appforliteracy
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
-class LearnerController {
+
+class LearnerController extends grails.plugin.springsecurity.ui.UserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    def springSecurityService
 
+    @Secured('ROLE_USER')
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Learner.list(params), model:[learnerCount: Learner.count()]
     }
 
+    @Secured('ROLE_USER')
     def show(Learner learner) {
         respond learner
     }
 
+    @Secured(['ROLE_RESEARCHER', 'ROLE_ADMIN'])
     def create() {
         respond new Learner(params)
     }
 
+    @Secured('ROLE_USER')
     def home() {
-        Learner r = Learner.findByUserID(params.id)
-        [fname:r.firstName, modules:r.getModules()]
+        def learner = springSecurityService.currentUser
+        //def firstName = researcher.firstName
+        [fname:learner.firstName, modules:learner.getModules()]
+    }
+    
+    def viewProgress() {
+        def learner = springSecurityService.currentUser
+        [fname:learner.firstName, modules:learner.getModules()]
     }
 
+    @Secured('ROLE_USER')
     def startModule() {
         String controller = params.type
         String id = params.id
@@ -60,10 +74,12 @@ class LearnerController {
         }
     }
 
+    @Secured('ROLE_USER')
     def edit(Learner learner) {
         respond learner
     }
 
+    @Secured('ROLE_USER')
     @Transactional
     def update(Learner learner) {
         if (learner == null) {
@@ -89,6 +105,7 @@ class LearnerController {
         }
     }
 
+    @Secured('ROLE_RESEARCHER')
     @Transactional
     def delete(Learner learner) {
 
