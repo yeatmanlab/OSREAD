@@ -8,6 +8,7 @@ grails.plugin.springsecurity.authority.className = 'appforliteracy.Role'
 //grails.plugin.springsecurity.rejectIfNoRule = false
 //grails.plugin.springsecurity.fii.rejectPublicInvocations = false
 grails.plugin.springsecurity.auth.loginFormUrl = '/login'
+grails.plugin.springsecurity.successHandler.defaultTargetUrl = "/researcher/home"
 grails.plugin.springsecurity.failureHandler.defaultFailureUrl = '/login/auth'
 grails.plugin.springsecurity.logout.afterLogoutUrl = '/'
 grails.plugin.springsecurity.logout.alwaysUseDefaultTargetUrl = true
@@ -27,7 +28,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 
 grails.plugin.springsecurity.securityConfigType = "InterceptUrlMap"
 grails.plugin.springsecurity.interceptUrlMap = [
-   [pattern: '/',               access: ['ROLE_RESEARCHER']],
+   [pattern: '/',               access: ['ROLE_RESEARCHER', 'ROLE_USER']],
    [pattern: '/error',          access: ['permitAll']],
    [pattern: '/index',          access: ['permitAll']],
    [pattern: '/index.gsp',      access: ['permitAll']],
@@ -42,7 +43,10 @@ grails.plugin.springsecurity.interceptUrlMap = [
    [pattern: '/logout',         access: ['permitAll']],
    [pattern: '/logout/**',      access: ['permitAll']],
    [pattern: '/researcher/**',  access: ['ROLE_RESEARCHER']],
-   [pattern: '/learner/**',     access: ['IS_AUTHENTICATED_FULLY']]
+   [pattern: '/learner/**',     access: ['IS_AUTHENTICATED_FULLY']],
+   [pattern: '/fileInput/**',   access: ['ROLE_RESEARCHER']],
+   [pattern: '/fileOutput/**',  access: ['ROLE_RESEARCHER']],
+   [pattern: '/firstExample/**',access: ['ROLE_USER']]
 ]
 
 grails.plugin.springsecurity.filterChain.chainMap = [

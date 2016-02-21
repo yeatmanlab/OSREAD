@@ -29,42 +29,45 @@ class FileInputController {
             render("Please select a file")
         } else if(params.moduleTypes == null) {
             render("Please select a module type")
-        } else if(params.moduleTypes.equals(type)) {
+        } else {
             String myString = IOUtils.toString(f.getInputStream(), "UTF-8")
             JSONObject input = new JSONObject(myString)
             String type = input.type
-            List<String> keys
-            try {
-                ParseDataService parser = new ParseDataService()
-                keys = parser.parseDataFile(input)
-            } catch (Exception e) {
-                println e.message
-            }
-            ModuleInput moduleInput = Class.forName(type.toLowerCase() + "." + type).newInstance()
-            for (key in keys) {
-                moduleInput[key] = input[key]
-            }
+            if(params.moduleTypes.equals(type)) {
 
-            Module m = new Module()
-            m.inputID = moduleInput.moduleDataID
-            m.type = moduleInput.type
+                List<String> keys
+                try {
+                    ParseDataService parser = new ParseDataService()
+                    keys = parser.parseDataFile(input)
+                } catch (Exception e) {
+                    println e.message
+                }
+                ModuleInput moduleInput = Class.forName(type.toLowerCase() + "." + type).newInstance()
+                for (key in keys) {
+                    moduleInput[key] = input[key]
+                }
 
-            Learner learner = Learner.findByUserID(params.learnerID)
-            if (learner.moduleIDs != null) {
-                learner.moduleIDs.add(m.moduleId)
+                Module m = new Module()
+                m.inputID = moduleInput.moduleDataID
+                m.type = moduleInput.type
+
+                Learner learner = Learner.findById(params.learnerID)
+                if (learner.moduleIDs != null) {
+                    learner.moduleIDs.add(m.moduleId)
+                } else {
+                    learner.moduleIDs = [m.moduleId]
+                }
+
+                moduleInput.save(flush: true)
+                m.save(flush: true)
+                learner.save(flush: true)
+
+                [id: params.learnerID]
+
             } else {
-                learner.moduleIDs = [m.moduleId]
+                //throw new IllegalStateException("Input file of wrong type")
+                render("Input file of wrong type")
             }
-
-            moduleInput.save(flush: true)
-            m.save(flush: true)
-            learner.save(flush: true)
-
-            [id: params.learnerID]
-
-        } else {
-            //throw new IllegalStateException("Input file of wrong type")
-            render("Input file of wrong type")
         }
     }
 

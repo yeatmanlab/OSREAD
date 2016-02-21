@@ -20,7 +20,7 @@
 <div class="container">
 
     <h2 class="form-signin-heading">Log In</h2>
-    <form action="${postUrl ?: '/login/authenticate'}" method="POST" id="loginForm" class="cssform" autocomplete="off">
+    <form action="${postUrl ?: '/login/authenticate'}" method="POST" id="loginForm" class="cssform" autocomplete="on">
 	<p>
             <label for="username"><g:message code='springSecurity.login.username.label'/>:</label>
             <input type="text" class="text_" name="${usernameParameter ?: 'username'}" id="username"/>
@@ -37,7 +37,7 @@
         </p>
 
 	<p>
-            <input type="submit" id="submit" value="${message(code: 'springSecurity.login.button')}"/>
+            <input type="submit" id="submit" controller="researcher" action="home" value="${message(code: 'springSecurity.login.button')}"/>
 	</p>
     </form>
 </div> <!-- /container -->
