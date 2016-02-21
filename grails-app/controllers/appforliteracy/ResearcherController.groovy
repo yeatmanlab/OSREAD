@@ -8,6 +8,7 @@ import grails.plugin.springsecurity.annotation.Secured
 class ResearcherController extends grails.plugin.springsecurity.ui.UserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    def springSecurityService
 
     @Secured('ROLE_RESEARCHER')
     def index(Integer max) {
@@ -32,13 +33,14 @@ class ResearcherController extends grails.plugin.springsecurity.ui.UserControlle
     
     @Secured('ROLE_RESEARCHER')
     def home() {
-        Researcher r = Researcher.getCurrentUser(params.email)
-        [fname:r.firstName, learners:r.getLearners()]
+        def researcher = springSecurityService.currentUser
+        //def firstName = researcher.firstName
+        [fname:researcher.firstName, learners:researcher.getLearners()]
     }
     
     @Secured('ROLE_RESEARCHER')
     def editLearners(){
-        Researcher r = Researcher.getCurrentUser(params.email)
+        def researcher = springSecurityService.currentUser
         render(view:"editLearners.gsp")
     }
 

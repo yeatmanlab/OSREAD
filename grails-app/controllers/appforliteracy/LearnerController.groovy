@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package appforliteracy
 
 import static org.springframework.http.HttpStatus.*
@@ -10,6 +9,7 @@ import grails.plugin.springsecurity.annotation.Secured
 class LearnerController extends grails.plugin.springsecurity.ui.UserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    def springSecurityService
 
     @Secured('ROLE_USER')
     def index(Integer max) {
@@ -29,9 +29,14 @@ class LearnerController extends grails.plugin.springsecurity.ui.UserController {
 
     @Secured('ROLE_USER')
     def home() {
-        Learner r = Learner.findByEmail(params.email)
-        //[fname:r.firstName, modules:r.getModules()]
-        [fname:r.firstName]
+        def learner = springSecurityService.currentUser
+        //def firstName = researcher.firstName
+        [fname:learner.firstName, modules:learner.getModules()]
+    }
+    
+    def viewProgress() {
+        def learner = springSecurityService.currentUser
+        [fname:learner.firstName, modules:learner.getModules()]
     }
 
     @Secured('ROLE_USER')

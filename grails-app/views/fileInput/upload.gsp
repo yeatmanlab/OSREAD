@@ -24,7 +24,7 @@
 
             <ul class="nav navbar-nav">
                 <li>
-                    <g:link action="logout" >Log Out</g:link>
+                    <g:link controller='logout'>Logout</g:link>
                 </li>
                 <li>
                     <g:link controller="Researcher" action="editLearners">Learners</g:link>
@@ -33,7 +33,6 @@
                     <a href="#">Modules</a>
                 </li>
                 <li>
-                    <a href="#">My Account</a>
                     <g:link controller="Researcher" action="home">Home</g:link>
                 </li>
 

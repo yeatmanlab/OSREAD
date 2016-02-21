@@ -18,23 +18,18 @@ class BootStrap {
 
     def init = { servletContext ->
 
-        /*Researcher researcher = new Researcher()
+        Researcher researcher = new Researcher('example@gmail.com','password','Nye','Bill').save()
         researcher.position = "Boss"
-        researcher.email = "example@gmail.com"
-        researcher.password = "password"
-        researcher.lastName = "Nye"
-        researcher.firstName = "Bill"
+        researcher.save()
 
-        Learner learner = new Learner()
-        learner.email = "example2@gmail.com"
-        learner.password = "password"
-        learner.lastName = "Baratheon"
-        learner.firstName = "Stannis"
-        //learner.researcherID = researcher.userID
+        Learner learner = new Learner('example2@gmail.com','password','Baratheon','Stannis').save()
+        //learner.researcherID = researcher.id
         learner.disability = "Secondborn Son Syndrome"
         learner.dateOfBirth = new Date(1990, 6, 15)
+        learner.save()
 
-        researcher.learnerIDs = [learner.id]*/
+        //researcher.learnerIDs = [learner.id]
+        researcher.save()
 
         /*FirstExample firstExample = new FirstExample()
         firstExample.type = "FirstExample"
@@ -59,30 +54,25 @@ class BootStrap {
         def testUser5 = new Researcher('patrick@uw.edu','password','Donnelly','Patrick').save()
         def testUser6 = new Researcher('anat@uw.edu','password','Caspi','Anat').save()
         
+        UserRole.create researcher, researcherRole
+        UserRole.create learner, userRole
         UserRole.create testUser1, userRole
         UserRole.create testUser2, userRole
         UserRole.create testUser3, userRole
         UserRole.create testUser4, researcherRole
         UserRole.create testUser5, researcherRole
         UserRole.create testUser6, adminRole
-        
-        /*def learner1 = new Learner(testUser1).save()
-        def learner2 = new Learner(testUser2).save()
-        def learner3 = new Learner(testUser3).save()
-        def researcher1 = new Researcher(testUser4).save()
-        def researcher2 = new Researcher(testUser5).save()
-        def researcher3 = new Researcher(testUser6).save()*/
           
         UserRole.withSession {
             it.flush()
             it.clear()
         }
         
-        //assert Learner.count() == 3
-        //assert Researcher.count() == 3
-        assert User.count() == 6
+        assert Learner.count() == 4
+        assert Researcher.count() == 4
+        assert User.count() == 8
         assert Role.count() == 3
-        assert UserRole.count() == 6
+        assert UserRole.count() == 8
         
 //        module.isCompleted = true
 //        Module module = new Module()

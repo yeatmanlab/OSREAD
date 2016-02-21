@@ -8,7 +8,7 @@ class Learner extends User {
     //User user
     Date dateOfBirth
     String disability
-    String researcherID
+    long researcherID
     static hasMany = [moduleIDs: String]
     List moduleIDs
 
@@ -20,6 +20,9 @@ class Learner extends User {
 	this.password = password
         this.lastName = lastName
         this.firstName = firstName
+    }
+    
+    Learner() {
     }
     
     static constraints = {

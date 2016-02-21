@@ -19,6 +19,9 @@ class Researcher extends User {
         this.firstName = firstName
     }
     
+    Researcher() {
+    }
+    
     static constraints = {
         position nullable: true
         learnerIDs nullable: true

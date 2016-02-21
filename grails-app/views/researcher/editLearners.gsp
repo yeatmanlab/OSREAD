@@ -34,7 +34,6 @@
                     <g:link controller="Researcher" action="editModules">Modules</g:link> 
                 </li>
                 <li>
-                    <g:link controller="Researcher" action="myAccount">My Account</g:link>
                     <g:link controller="Researcher" action="home">Home</g:link>
                 </li>
 
