@@ -50,8 +50,9 @@ class FileInputController {
                 Module m = new Module()
                 m.inputID = moduleInput.moduleDataID
                 m.type = moduleInput.type
-
+                
                 Learner learner = Learner.findById(params.learnerID)
+
                 if (learner.moduleIDs != null) {
                     learner.moduleIDs.add(m.moduleId)
                 } else {
