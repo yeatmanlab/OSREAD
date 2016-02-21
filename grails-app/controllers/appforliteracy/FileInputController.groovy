@@ -1,21 +1,29 @@
 package appforliteracy
 
 import grails.io.IOUtils
+import grails.plugin.springsecurity.annotation.Secured
 import org.grails.web.json.JSONObject
 import metafunctionality.Module
 import metafunctionality.ModuleInput
 
 class FileInputController {
 
-    def index = { redirect(action: 'list') }
+    @Secured('ROLE_RESEARCHER')
+    def index () {
+        print("index")
+        redirect(action: 'list')
+    }
 
-    def list = {
+    @Secured('ROLE_RESEARCHER')
+    def list () {
+        print("list")
         List<String> types = ModuleListService.getModuleNames()
 
         [type: types, id: params.id]
     }
 
-    def upload = {
+    @Secured('ROLE_RESEARCHER')
+    def upload () {
         def f = request.getFile('fileUpload')
         if(f.isEmpty()) {
             render("Please select a file")

@@ -6,7 +6,7 @@ class Researcher extends User {
     
     User user
     String position
-    static hasMany = [learnerIDs: String]
+    static hasMany = [learnerIDs: Long]
     List learnerIDs
 
     /*Researcher(User user) {
@@ -29,8 +29,11 @@ class Researcher extends User {
 
     def getLearners () {
         List<Learner> learners = new ArrayList<>()
+        println("outside")
         for (learnerID in learnerIDs) {
-            learners.add(Learner.findByUserID(learnerID))
+            Learner learner = Learner.findById(learnerID)
+            println(learner)
+            learners.add(learner)
         }
         return learners
     }

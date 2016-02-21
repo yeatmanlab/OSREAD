@@ -59,17 +59,15 @@
     <!-- /.row -->
 
 
-    <g:each in="${users}" var="user">
+    <g:each in="${learners}" var="user">
         <div class="row" id="learners">
             <g:form>
                 <div class="col-md-5">
 
                     <h3>${user.firstName} ${user.lastName}</h3>
                     %{--<p>Put information about ${learner.firstName} here.</p>--}%
-                    <g:hiddenField name="learnerID" value="${user.id}" />
-                    <h3>${learner.firstName} ${learner.lastName}</h3>
-                    %{--<p>Put information about ${learner.firstName} here.</p>--}%
-                    <g:hiddenField name="learnerID" value="${learner.userID}" />
+
+                    <g:hiddenField name="learnerID" value="${user.getId()}" />
 
                     <g:actionSubmit class="btn btn-primary" href="#" value="View Progress" action="progress" />
 

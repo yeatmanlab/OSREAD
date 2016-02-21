@@ -16,6 +16,7 @@ class ResearcherController extends grails.plugin.springsecurity.ui.UserControlle
         respond Researcher.list(params), model:[researcherCount: Researcher.count()]
     }
 
+
     @Secured('ROLE_RESEARCHER')
     def show(Researcher researcher) {
         respond researcher
@@ -33,8 +34,10 @@ class ResearcherController extends grails.plugin.springsecurity.ui.UserControlle
     
     @Secured('ROLE_RESEARCHER')
     def home() {
-        def researcher = springSecurityService.currentUser
+        Researcher researcher = springSecurityService.currentUser
         //def firstName = researcher.firstName
+        println(researcher)
+        println(researcher.getLearners())
         [fname:researcher.firstName, learners:researcher.getLearners()]
     }
     

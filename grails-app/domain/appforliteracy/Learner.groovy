@@ -8,7 +8,7 @@ class Learner extends User {
     //User user
     Date dateOfBirth
     String disability
-    long researcherID
+    //long researcherID
     static hasMany = [moduleIDs: String]
     List moduleIDs
 
@@ -28,12 +28,7 @@ class Learner extends User {
     static constraints = {
         dateOfBirth nullable: true
         disability nullable: true
-        researcherID nullable: true
         moduleIDs nullable: true
-    }
-
-    def getResearcher () {
-        return Researcher.findById(researcherID)
     }
 
     def getModules () {
