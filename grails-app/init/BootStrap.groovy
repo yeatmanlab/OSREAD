@@ -47,7 +47,7 @@ class BootStrap {
 
 
 
-        Researcher researcher = new Researcher('a','a','Nye','Bill')
+        Researcher researcher = new Researcher('example@gmail.com','password','Nye','Bill')
         researcher.position = "Boss"
 
         researcher.learnerIDs = [learner.getId()]
