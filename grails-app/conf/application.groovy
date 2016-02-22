@@ -7,14 +7,14 @@ grails.plugin.springsecurity.userLookup.usernamePropertyName = 'email'
 grails.plugin.springsecurity.authority.className = 'appforliteracy.Role'
 //grails.plugin.springsecurity.rejectIfNoRule = false
 //grails.plugin.springsecurity.fii.rejectPublicInvocations = false
-grails.plugin.springsecurity.auth.loginFormUrl = '/login'
+grails.plugin.springsecurity.auth.loginFormUrl = '/login/auth'
 grails.plugin.springsecurity.successHandler.defaultTargetUrl = "/researcher/home"
 grails.plugin.springsecurity.failureHandler.defaultFailureUrl = '/login/auth'
 grails.plugin.springsecurity.logout.afterLogoutUrl = '/'
 grails.plugin.springsecurity.logout.alwaysUseDefaultTargetUrl = true
 grails.plugin.springsecurity.logout.postOnly = false
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-	[pattern: '/',               access: ['permitAll']],
+	[pattern: '/',               access: ['ROLE_RESEARCHER', 'ROLE_USER']],
 	[pattern: '/error',          access: ['permitAll']],
 	[pattern: '/index',          access: ['permitAll']],
 	[pattern: '/index.gsp',      access: ['permitAll']],

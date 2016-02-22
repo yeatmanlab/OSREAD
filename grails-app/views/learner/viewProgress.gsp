@@ -42,7 +42,7 @@
             <h1 class="page-header">Progress</h1>
         </div>
         <div>
-            <p>You have completed 0 lessons so far! Keep going!</p>
+            <p>You have completed ${modules.size()} lessons so far! Keep going!</p>
         </div>
         <br/>
         <div>

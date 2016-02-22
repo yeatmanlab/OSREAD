@@ -6,12 +6,12 @@ class AuthenticationController {
         User r = User.findByEmail(params.email)
         if (r.password == params.password){
             if (r instanceof Researcher) {
-                redirect(controller: "researcher", action: "home", id: r.userID)
+                redirect(controller: "researcher", action: "home", id: r.getId())
             } else {
-                redirect(controller: "learner", action: "home", id: r.userID)
+                redirect(controller: "learner", action: "home", id: r.getId())
             }
         } else {
-            render(view:"../login/login.gsp") //TODO: FIX
+            render(view:"../login/auth.gsp") //TODO: FIX
         }
     }
 }

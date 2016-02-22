@@ -3,6 +3,7 @@ package appforliteracy
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
+import metafunctionality.Module
 
 @Transactional(readOnly = true)
 
@@ -31,12 +32,24 @@ class LearnerController extends grails.plugin.springsecurity.ui.UserController {
     def home() {
         def learner = springSecurityService.currentUser
         //def firstName = researcher.firstName
-        [fname:learner.firstName, modules:learner.getModules()]
+        List<Module> incomplete = new ArrayList()
+        for (module in learner.getModules()) {
+            if (!module.isCompleted) {
+                incomplete.add(module)
+            }
+        }
+        [fname:learner.firstName, modules:incomplete]
     }
     
     def viewProgress() {
         def learner = springSecurityService.currentUser
-        [fname:learner.firstName, modules:learner.getModules()]
+        List<Module> complete = new ArrayList()
+        for (module in learner.getModules()) {
+            if (module.isCompleted) {
+                complete.add(module)
+            }
+        }
+        [fname:learner.firstName, modules:complete]
     }
 
     @Secured('ROLE_USER')
