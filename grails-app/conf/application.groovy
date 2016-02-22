@@ -1,6 +1,7 @@
 
 
 // Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.useSecurityEventListener = true
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'appforliteracy.User'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'appforliteracy.UserRole'
 grails.plugin.springsecurity.userLookup.usernamePropertyName = 'email'
@@ -8,7 +9,8 @@ grails.plugin.springsecurity.authority.className = 'appforliteracy.Role'
 //grails.plugin.springsecurity.rejectIfNoRule = false
 //grails.plugin.springsecurity.fii.rejectPublicInvocations = false
 grails.plugin.springsecurity.auth.loginFormUrl = '/login/auth'
-grails.plugin.springsecurity.successHandler.defaultTargetUrl = "/researcher/home"
+grails.plugin.springsecurity.successHandler.alwaysUseDefault = true
+grails.plugin.springsecurity.successHandler.defaultTargetUrl = "/user/auth"
 grails.plugin.springsecurity.failureHandler.defaultFailureUrl = '/login/auth'
 grails.plugin.springsecurity.logout.afterLogoutUrl = '/'
 grails.plugin.springsecurity.logout.alwaysUseDefaultTargetUrl = true
@@ -17,7 +19,6 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	[pattern: '/',               access: ['ROLE_RESEARCHER', 'ROLE_USER']],
 	[pattern: '/error',          access: ['permitAll']],
 	[pattern: '/index',          access: ['permitAll']],
-	[pattern: '/index.gsp',      access: ['permitAll']],
 	[pattern: '/shutdown',       access: ['permitAll']],
 	[pattern: '/assets/**',      access: ['permitAll']],
 	[pattern: '/**/js/**',       access: ['permitAll']],
@@ -31,7 +32,6 @@ grails.plugin.springsecurity.interceptUrlMap = [
    [pattern: '/',               access: ['ROLE_RESEARCHER', 'ROLE_USER']],
    [pattern: '/error',          access: ['permitAll']],
    [pattern: '/index',          access: ['permitAll']],
-   [pattern: '/index.gsp',      access: ['permitAll']],
    [pattern: '/shutdown',       access: ['permitAll']],
    [pattern: '/assets/**',      access: ['permitAll']],
    [pattern: '/**/js/**',       access: ['permitAll']],
@@ -46,7 +46,9 @@ grails.plugin.springsecurity.interceptUrlMap = [
    [pattern: '/learner/**',     access: ['IS_AUTHENTICATED_FULLY']],
    [pattern: '/fileInput/**',   access: ['ROLE_RESEARCHER']],
    [pattern: '/fileOutput/**',  access: ['ROLE_RESEARCHER']],
-   [pattern: '/firstExample/**',access: ['ROLE_USER']]
+   [pattern: '/firstExample/**',access: ['ROLE_USER']],
+   [pattern: '/user/**',        access: ['ROLE_RESEARCHER', 'ROLE_USER']]
+
 ]
 
 grails.plugin.springsecurity.filterChain.chainMap = [
@@ -60,4 +62,5 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 
 grails.plugin.springsecurity.rememberMe.persistent = true
 grails.plugin.springsecurity.rememberMe.persistentToken.domainClassName = 'appforliteracy.PersistentLogin'
+
 
