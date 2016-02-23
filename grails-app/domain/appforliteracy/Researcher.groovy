@@ -9,9 +9,6 @@ class Researcher extends User {
     static hasMany = [learnerIDs: Long]
     List learnerIDs
 
-    /*Researcher(User user) {
-        this.user = user
-    }*/
     Researcher(String email, String password, String lastName, String firstName) {
 	this.email = email
 	this.password = password
@@ -29,10 +26,8 @@ class Researcher extends User {
 
     def getLearners () {
         List<Learner> learners = new ArrayList<>()
-        println("outside")
         for (learnerID in learnerIDs) {
             Learner learner = Learner.findById(learnerID)
-            println(learner)
             learners.add(learner)
         }
         return learners

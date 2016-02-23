@@ -10,8 +10,7 @@ class User implements Serializable {
     private static final long serialVersionUID = 1
 
     transient springSecurityService
-    
-    //String userID = UUID.randomUUID().toString()
+
     String email
     String password
     boolean enabled = true

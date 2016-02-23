@@ -17,50 +17,17 @@ class BootStrap {
     def init = { servletContext ->
 
         Learner learner = new Learner('example2@gmail.com','password','Baratheon','Stannis')
-        //learner.researcherID = researcher.id
         learner.disability = "Secondborn Son Syndrome"
         learner.dateOfBirth = new Date(1990, 6, 15)
 
-//        firstExample.save(flush: true)
-//        FirstExample firstExample = new FirstExample()
-//        firstExample.type = "FirstExample"
-//        firstExample.name = "Example1"
-//        firstExample.word = "Hall"
-//        firstExample.answer = "Ball"
-//        firstExample.rhymingCandidates = ["Game", "Alligator", "Pinwheel"]
-//
-//        Module module = new Module()
-//        module.inputID = firstExample.moduleDataID
-//        module.type = firstExample.type
-//        module.isCompleted = true
-//
-//        ModuleOutput output = new ModuleOutput()
-//        output.headers = ["word", "accuracy"]
-//        output.valueRows = ["Hello,100"]
-//        output.type = firstExample.type
-
-        //module.outputIDs = [output.moduleDataID]
-
-        //learner.moduleIDs = [module.moduleId]
-
         learner.save(flush: true)
-
-
 
         Researcher researcher = new Researcher('example@gmail.com','password','Nye','Bill')
         researcher.position = "Boss"
 
         researcher.learnerIDs = [learner.getId()]
-        println(learner.getId())
-
-
 
         researcher.save(flush: true)
-
-
-
-//        module.save(flush: true)
-//        output.save(flush: true)
 
         def adminRole = new Role('ROLE_ADMIN').save()
         def userRole = new Role('ROLE_USER').save()

@@ -4,17 +4,12 @@ import metafunctionality.Module
 import appforliteracy.User
 
 class Learner extends User {
-    
-    //User user
+
     Date dateOfBirth
     String disability
-    //long researcherID
     static hasMany = [moduleIDs: String]
     List moduleIDs
 
-    /*Learner(User user) {
-        //this.user = user
-    }*/
     Learner(String email, String password, String lastName, String firstName) {
 	this.email = email
 	this.password = password
