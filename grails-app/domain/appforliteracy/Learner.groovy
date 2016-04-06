@@ -3,6 +3,10 @@ package appforliteracy
 import metafunctionality.Module
 import appforliteracy.User
 
+/*
+    Class structure for learner (student).
+ */
+
 class Learner extends User {
 
     Date dateOfBirth

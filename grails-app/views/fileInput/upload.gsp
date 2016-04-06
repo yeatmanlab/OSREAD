@@ -10,6 +10,7 @@
 <head>
     <title>Module Successfully Assigned</title>
 
+    <!-- How the Page is Styled-->
     <asset:stylesheet src="bootstrap.css"/>
     <asset:javascript src="bootstrap.js"/>
 </head>
@@ -19,8 +20,6 @@
     <div class="container">
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-
 
             <ul class="nav navbar-nav">
                 <li>

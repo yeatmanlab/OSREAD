@@ -2,6 +2,10 @@ package appforliteracy
 
 import appforliteracy.User
 
+/*
+    Class structure for the researcher
+ */
+
 class Researcher extends User {
     
     User user

@@ -3,6 +3,10 @@ package appforliteracy
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 
+/*
+    Class structure for log-in system
+ */
+
 @EqualsAndHashCode(includes=['series', 'username'])
 @ToString(includes=['series', 'username'], cache=true, includeNames=true, includePackage=false)
 class PersistentLogin implements Serializable {

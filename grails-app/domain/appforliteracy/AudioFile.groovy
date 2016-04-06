@@ -1,5 +1,9 @@
 package appforliteracy
 
+/*
+    Class structure for audiofile. Basic outline, we can change this.
+ */
+
 class AudioFile {
     
     String filename

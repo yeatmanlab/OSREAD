@@ -9,6 +9,8 @@
     <meta name="author" content="">
 
     <title>Register</title>
+
+    <!-- How the Page is Styled-->
     <asset:stylesheet src="bootstrap.css"/>
     <asset:javascript src="bootstrap.js"/>
 

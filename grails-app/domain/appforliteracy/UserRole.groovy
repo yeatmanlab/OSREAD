@@ -5,6 +5,10 @@ import groovy.transform.ToString
 
 import org.apache.commons.lang.builder.HashCodeBuilder
 
+/*
+    User role class structure. Required for log-in system.
+ */
+
 @ToString(cache=true, includeNames=true, includePackage=false)
 class UserRole implements Serializable {
 

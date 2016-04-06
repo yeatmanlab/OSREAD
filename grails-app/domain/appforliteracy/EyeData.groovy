@@ -1,5 +1,9 @@
 package appforliteracy
 
+/*
+    Class structure for eye data. This is super basic and we can change this.
+ */
+
 class EyeData {
     
     int sampleRate

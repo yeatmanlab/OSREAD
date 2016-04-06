@@ -10,6 +10,7 @@
 <head>
     <title>View Progress</title>
 
+    <!-- How the Page is Styled-->
     <asset:stylesheet src="bootstrap.css"/>
     <asset:javascript src="bootstrap.js"/>
 </head>

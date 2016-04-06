@@ -3,6 +3,10 @@ package appforliteracy
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 
+/*
+    Outline for the user. Required for log-in system.
+ */
+
 @EqualsAndHashCode(includes='email')
 @ToString(includes='email', includeNames=true, includePackage=false)
 class User implements Serializable {
