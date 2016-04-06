@@ -4,6 +4,11 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 
+/*
+    Controls the processes for the Researcher. Allows displaying the correct pages like assigning modules, showing
+    students, editing learners, viewing student progress.
+ */
+
 @Transactional(readOnly = true)
 class ResearcherController extends grails.plugin.springsecurity.ui.UserController {
 

@@ -3,6 +3,10 @@ import grails.plugin.springsecurity.*
 
 class AuthenticationController {
 
+    /*
+        Part of Spring Security system. For log-in authentication purposes.
+     */
+
     def auth() {
         User r = springSecurityService.currentUser
         if (r.password == params.password){

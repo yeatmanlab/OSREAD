@@ -8,12 +8,21 @@ import metafunctionality.ModuleInput
 
 class FileInputController {
 
+    /*
+        This controller corresponds to the process of a researcher assigning a module to a learner. When the researcher
+        assigns the module, they include a file containing individualized input for the student. This controller
+        corresponds to that file input process.
+     */
+
     @Secured('ROLE_RESEARCHER')
     def index () {
         print("index")
         redirect(action: 'list')
     }
 
+    /*
+        Lists the names of the modules which have been uploaded to the bintray.
+    */
     @Secured('ROLE_RESEARCHER')
     def list () {
         print("list")
@@ -22,6 +31,10 @@ class FileInputController {
         [type: types, id: params.id]
     }
 
+    /*
+        Displays instruction messages to user to upload a file. When an appropriate file is uploaded, the content is
+        inserted in the module and the module with content is assigned to the learner.
+     */
     @Secured('ROLE_RESEARCHER')
     def upload () {
         def f = request.getFile('fileUpload')

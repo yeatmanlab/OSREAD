@@ -5,8 +5,12 @@ import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 import metafunctionality.Module
 
-@Transactional(readOnly = true)
+/*
+    Controls the processes for the Learner (student). Allows displaying the correct pages like starting a module or
+    viewing progress.
+ */
 
+@Transactional(readOnly = true)
 class LearnerController extends grails.plugin.springsecurity.ui.UserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -40,7 +44,10 @@ class LearnerController extends grails.plugin.springsecurity.ui.UserController {
         }
         [fname:learner.firstName, modules:incomplete]
     }
-    
+
+    /*
+        View the modules completed
+     */
     def viewProgress() {
         def learner = springSecurityService.currentUser
         List<Module> complete = new ArrayList()
@@ -52,6 +59,9 @@ class LearnerController extends grails.plugin.springsecurity.ui.UserController {
         [fname:learner.firstName, modules:complete]
     }
 
+    /*
+        Start modules
+     */
     @Secured('ROLE_USER')
     def startModule() {
         String controller = params.type

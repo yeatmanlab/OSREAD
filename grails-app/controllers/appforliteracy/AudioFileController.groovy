@@ -2,6 +2,10 @@ package appforliteracy
 
 class AudioFileController {
 
+    /*
+        Placeholder file until audio capabilities enabled.
+     */
+
     def index() { }
     
     def upload(){

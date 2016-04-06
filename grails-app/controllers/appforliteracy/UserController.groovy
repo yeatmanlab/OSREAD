@@ -1,5 +1,9 @@
 package appforliteracy
 
+/*
+    Required for spring security log-in authentication
+ */
+
 class UserController extends grails.plugin.springsecurity.ui.UserController {
     def springSecurityService
 
