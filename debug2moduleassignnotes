@@ -1,0 +1,26 @@
+params id is what you see in the url.
+
+Bexample
+params.id c5963258-5891-4892-a2e9-c1e122b40ab6
+test
+inputID4b286c0e-f2fa-4a2e-ae95-21efa6a37ec4
+Bexample
+params.id 041cb0ea-a993-43c7-bd8b-338b7ed46112
+test
+inputIDa372f250-7e71-4b42-84f9-260672fec5e2
+true
+Bexample
+//^^ trying to play the same module instance as b4
+params.id 041cb0ea-a993-43c7-bd8b-338b7ed46112
+test
+inputIDa372f250-7e71-4b42-84f9-260672fec5e2
+// vv a different instance, which also failed
+Bexample
+params.id b6c00261-f4e3-4caf-b17f-4a247d1fea20
+test
+inputIDf18f7ab2-d8cc-4b06-9c9c-db532df3eac6
+true
+
+vvv All methods of Bexample object
+[$static_methodMissing, addToRhymingCandidates, asType, attach, clearErrors, count, create, createCriteria, currentGormInstanceApi, currentGormStaticApi, currentGormValidationApi, dateString, delete, deleteAll, discard, equals, executeQuery, executeUpdate, exists, find, findAll, findAllWhere, findByModuleDataID, findOrCreateWhere, findOrSaveWhere, findWhere, first, get, getAll, getAnswer, getAsync, getClass, getConstrainedProperties, getConstraints, getCount, getDirtyPropertyNames, getErrors, getGormDynamicFinders, getGormPersistentEntity, getHasMany, getId, getMetaClass, getModuleDataID, getName, getOriginalValue, getPersistentValue, getProperties, getProperty, getRhymingCandidates, getTimestamp, getType, getValidationErrorsMap, getValidationSkipMap, getVersion, getWord, grails_web_databinding_WebDataBindingtrait$super$getProperties, grails_web_databinding_WebDataBindingtrait$super$setProperties, hasChanged, hasErrors, hashCode, ident, initInternalApi, initInternalStaticApi, initInternalValidationApi, insert, instanceOf, invokeMethod, isAttached, isDirty, last, list, listDirtyPropertyNames, load, lock, markDirty, merge, mutex, notify, notifyAll, org_grails_datastore_gorm_GormEntity__internalInstanceApi$get, org_grails_datastore_gorm_GormEntity__internalInstanceApi$set, org_grails_datastore_gorm_GormEntity__internalStaticApi$get, org_grails_datastore_gorm_GormEntity__internalStaticApi$set, org_grails_datastore_gorm_GormEntitytrait$super$attach, org_grails_datastore_gorm_GormEntitytrait$super$delete, org_grails_datastore_gorm_GormEntitytrait$super$discard, org_grails_datastore_gorm_GormEntitytrait$super$getDirtyPropertyNames, org_grails_datastore_gorm_GormEntitytrait$super$getPersistentValue, org_grails_datastore_gorm_GormEntitytrait$super$ident, org_grails_datastore_gorm_GormEntitytrait$super$insert, org_grails_datastore_gorm_GormEntitytrait$super$instanceOf, org_grails_datastore_gorm_GormEntitytrait$super$isAttached, org_grails_datastore_gorm_GormEntitytrait$super$isDirty, org_grails_datastore_gorm_GormEntitytrait$super$lock, org_grails_datastore_gorm_GormEntitytrait$super$merge, org_grails_datastore_gorm_GormEntitytrait$super$mutex, org_grails_datastore_gorm_GormEntitytrait$super$refresh, org_grails_datastore_gorm_GormEntitytrait$super$save, org_grails_datastore_gorm_GormValidateable__errors$get, org_grails_datastore_gorm_GormValidateable__errors$set, org_grails_datastore_gorm_GormValidateable__internalValidationApi$get, org_grails_datastore_gorm_GormValidateable__internalValidationApi$set, org_grails_datastore_gorm_GormValidateabletrait$super$clearErrors, org_grails_datastore_gorm_GormValidateabletrait$super$getErrors, org_grails_datastore_gorm_GormValidateabletrait$super$hasErrors, org_grails_datastore_gorm_GormValidateabletrait$super$setErrors, org_grails_datastore_gorm_GormValidateabletrait$super$validate, proxy, read, refresh, removeFromRhymingCandidates, save, saveAll, setAnswer, setBeforeValidateHelper, setConfig, setConstraints, setErrors, setFailOnError, setHasMany, setId, setMetaClass, setModuleDataID, setName, setObjectToReadOnly, setObjectToReadWrite, setProperties, setProperty, setRhymingCandidates, setTimestamp, setType, setValidationException, setValidator, setVersion, setWord, toString, trackChanges, validate, wait, where, whereAny, whereLazy, withCriteria, withDatastoreSession, withNewSession, withNewTransaction, withSession, withStatelessSession, withTransaction]
+

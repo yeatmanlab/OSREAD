@@ -47,6 +47,7 @@ grails.plugin.springsecurity.interceptUrlMap = [
    [pattern: '/fileInput/**',   access: ['ROLE_RESEARCHER']],
    [pattern: '/fileOutput/**',  access: ['ROLE_RESEARCHER']],
    [pattern: '/firstExample/**',access: ['ROLE_USER']],
+   [pattern: '/bexample/**',access: ['ROLE_USER']],
    [pattern: '/user/**',        access: ['ROLE_RESEARCHER', 'ROLE_USER']]
 
 ]
