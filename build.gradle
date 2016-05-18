@@ -80,6 +80,8 @@ dependencies {
     //@@@ ADD DEPENDENCIES HERE
     compile "org.grails.plugins:SecondExample:0.2"
     compile "org.grails.plugins:Bexample:0.1"
+    compile "org.grails.plugins:FifthExample:0.2"
+    compile "org.grails.plugins:ThirdExample:0.2"
 
     runtime "org.grails.plugins:asset-pipeline"
 
