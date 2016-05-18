@@ -10,6 +10,11 @@ import appforliteracy.UserRole
 import metafunctionality.Module
 
 import firstexample.FirstExample
+// TODO: add more import lines for other modules
+import bexample.Bexample
+import secondexample.SecondExample
+import fifthexample.FifthExample
+import thirdexample.ThirdExample
 import metafunctionality.ModuleOutput
 
 class BootStrap {
