@@ -225,7 +225,68 @@ def submit() {
 }
 ```
 
-### 8. Publish Plugin to Remote Maven Repository
+### 8. Create Views
+
+##### 1. Create a type folder
+
+Navigate to /grails-app/views and create a new directory called type.
+
+##### 2. Create start.gsp
+
+Navigate to /grails-app/views/type and create a new file called start.gsp. Edit it to have the HTML for what you want on the start page when the learner plays the module.
+
+Example:
+```
+<%@ page contentType="text/html;charset=UTF-8" %>
+<html>
+<head>
+    <title>Sample Module Input</title>
+</head>
+
+<body>
+<g:form params="[modID: modID]">
+    <label>Which of the following rhymes with ${word}?</label>
+    <g:radioGroup name="candidates"
+                  labels="${rc}"
+                  values="${rc}">
+        <p>${it.radio} ${it.label} </p>
+    </g:radioGroup>
+
+    <g:actionSubmit value="submit" />
+</g:form>
+</body>
+</html>
+```
+
+##### 3. Create submit.gsp
+
+Navigate to /grails-app/views/type and create a new file called submit.gsp. Edit it to have the HTML for what you want on the submit page when the learner finishes the module.
+
+Example:
+```
+<%--
+  Created by IntelliJ IDEA.
+  User: josephkesting
+  Date: 2/18/16
+  Time: 10:54 AM
+--%>
+
+<%@ page contentType="text/html;charset=UTF-8" %>
+<html>
+<head>
+    <title>Completed</title>
+</head>
+
+<body>
+<g:form>
+    <h3>Module Completed!</h3>
+    <g:actionSubmit value="Log out" action="logout" />
+</g:form>
+</body>
+</html>
+```
+
+### 9. Publish Plugin to Remote Maven Repository
 
 Once you have completed your module you must publish it to the Maven repository.
 
@@ -272,10 +333,10 @@ $ grails gradle bintrayUpload
 You should now be able to navigate to https://bintray.com/osreadplugins/plugins
 and see your plugin!
 
-### 9. Add Dependencies into the OsREAD Main Application
+### 10. Add Dependencies into the OsREAD Main Application
 Once you have published your plugin to the Maven repository you are now ready to integrate it into the main application!
 
-Two things are required to do this:
+Four things are required to do this:
 ##### 1. Add Dependency
 Add the following line to the AppForLiteracy/build.gradle file:
 ```
@@ -300,6 +361,28 @@ class ModuleListService {
         return names
     }
 }
+```
+
+##### 3. Add Your Type to osREAD/grails-app/init/BootStrap.groovy
+```
+...
+import firstexample.FirstExample
+import type.Type
+// TODO: add more import lines for other modules
+...
+```
+
+##### 4. Add Permissions to osREAD/grails-app/conf/application.groovy
+```
+...
+grails.plugin.springsecurity.interceptUrlMap = [
+ ...
+ [pattern: '/firstExample/**',access: ['ROLE_USER']],
+ [pattern: '/type/**',access: ['ROLE_USER']],
+ // TODO: add this same line for more plugins
+ ...
+]
+...
 ```
 
 You're new module should be completely functional! Test it by assigning the module with a module input file that matches your specified input plus name and type fields.
