@@ -72,9 +72,9 @@ class FileInputController {
                     learner.moduleIDs = [m.moduleId]
                 }
 
-                moduleInput.save(flush: true)
-                m.save(flush: true)
-                learner.save(flush: true)
+                moduleInput.save(flush: true, failOnError: true)
+                m.save(flush: true, failOnError: true)
+                learner.save(flush: true, failOnError: true)
 
                 [id: params.learnerID]
 
