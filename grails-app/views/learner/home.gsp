@@ -15,10 +15,14 @@
     <asset:stylesheet src="bootstrap.css"/>
     <asset:javascript src="bootstrap.js"/>
 
+    <!--- audio testing @@@@@ -->
+    <sm:inlinePlayer/>
+    <g:javascript src="swfobject.js"/> -->
+
 </head>
 
 <body>
-
+<a href="localhost:8080/assets/horse.mp3"> lolcats </a>
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
@@ -41,6 +45,29 @@
 
 <!-- Page Content -->
 <div class="container">
+
+    <!-- @@@@@@      INSERTED IMAGE HERE ONLY FOR TESTING IF CAN SHOW IMAGE-->
+    <g:img file="apple-touch-icon.png" />
+    <g:img file="grails_logo.png" />
+    <g:img file="lol.png" />
+    <img src="${resource(file:'favicon.ico')}" />
+    <!--<g:img absolute='true' dir='assets/images' file="apple-touch-icon.png" />-->
+    <g:img absolute='true' file="apple-touch-icon.png"/>
+    <!-- i have NO idea what the 'true' default base is. but i'll figure that out later -->
+     <g:img base='http://localhost:8080/' file="database_add.png"/>
+     <g:img base='http://localhost:8080/' file="database_add.png"/>
+    <!--<g:img uri="assets/images/apple-touch-icon.png"/> -->
+    <!--<img src="${resource(dir:'rain',file:'lol.png')}" /> -->
+    <!-- <g:img dir="assets/images" file="lol.png" /> -->
+
+    <audio controls>
+      <source src="localhost:8080/assets/horse.mp3" type="audio/mpeg">
+    </audio>
+    
+    <sm:playlist>
+    <a href="localhost:8080/assets/horse.mp3" class="inline-playable">A song</a>
+    </sm:playlist >
+
 
     <!-- Page Heading -->
     <div class="row">

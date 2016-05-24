@@ -56,25 +56,43 @@ class FileInputController {
                     println e.message
                 }
                 ModuleInput moduleInput = Class.forName(type.toLowerCase() + "." + type).newInstance()
+                // ^eg. bexample.Bexample 
+                if(moduleInput != null){
+                	println("new moduleInput created!")
+                	} else {
+                	println("no moduleInput made! (null)")
+                	}
                 for (key in keys) {
+                	println("key" + key)
+                	//these are the variables that you declared in the sample input file (eg rhymingCandidates)
                     moduleInput[key] = input[key]
                 }
 
                 Module m = new Module()
                 m.inputID = moduleInput.moduleDataID
+                println("[Type] inputID" + m.inputID)
                 m.type = moduleInput.type
+                println("[Type] type" + m.type)
                 
                 Learner learner = Learner.findById(params.learnerID)
 
                 if (learner.moduleIDs != null) {
+                	println("learner moduleID is NOT null")
                     learner.moduleIDs.add(m.moduleId)
                 } else {
+                	println("learner moduleID is null")
                     learner.moduleIDs = [m.moduleId]
                 }
 
-                moduleInput.save(flush: true)
-                m.save(flush: true)
-                learner.save(flush: true)
+                println("[Type] name = " + moduleInput.name)
+
+                // vv returns false for any module assignment besides the 1st one.
+                // therefore, the moduleInput is created, but might be garbage collected after that.
+                //GORM == Grails object relational mapping
+                //"call save to persist your class/object to the database..."
+                moduleInput.save(flush: true, failOnError: true)
+                m.save(flush: true, failOnError: true)
+                learner.save(flush: true, failOnError: true)
 
                 [id: params.learnerID]
 

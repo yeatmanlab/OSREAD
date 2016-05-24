@@ -1,0 +1,11 @@
+{
+	"type": "Bexample",
+	"name": "Example Input 6",
+	"word": "Tragic",
+	"answer": "Magic",
+	"rhymingCandidates": [
+		"Hello",
+		"Weird",
+		"Spot"			
+	]
+}
