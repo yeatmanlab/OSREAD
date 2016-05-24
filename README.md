@@ -210,7 +210,7 @@ def submit() {
     
     output.valueRows = params.data
     
-    Module m = //load from saveModuleService
+    Module m = Module.findByModuleId(params.modID)
     if (m.outputIDs != null) {
         m.outputIDs.add(output.moduleDataID)
     } else {
