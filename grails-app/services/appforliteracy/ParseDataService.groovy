@@ -61,6 +61,8 @@ class ParseDataService {
             }
         } else {
             Class type = Class.forName(getFullClassString(keyType))
+            println(type)
+            println(data[key].getClass())
             if (!type.equals(data[key].getClass())) {
                 throw new IllegalStateException("Value of key: " + key + " is of wrong type")
                 //TODO: Throw customized exception extending IllegalStateException

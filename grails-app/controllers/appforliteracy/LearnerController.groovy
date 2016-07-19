@@ -37,6 +37,7 @@ class LearnerController extends grails.plugin.springsecurity.ui.UserController {
         def learner = springSecurityService.currentUser
         //def firstName = researcher.firstName
         List<Module> incomplete = new ArrayList()
+        println(learner)
         for (module in learner.getModules()) {
             if (!module.isCompleted) {
                 incomplete.add(module)

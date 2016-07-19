@@ -46,6 +46,8 @@ class FileInputController {
             String myString = IOUtils.toString(f.getInputStream(), "UTF-8")
             JSONObject input = new JSONObject(myString)
             String type = input.type
+            println(type)
+            println(params.moduleTypes)
             if(params.moduleTypes.equals(type)) {
 
                 List<String> keys
